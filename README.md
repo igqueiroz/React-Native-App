@@ -1,29 +1,49 @@
-# README #
+# App Agenda4Pets
 
-This README would normally document whatever steps are necessary to get your application up and running.
+Esse repositório não aceita CLONE, marges são feitos somente via `pull requests`. Leia Regras do Repositório.
 
-### What is this repository for? ###
+## Início Rápido
+---
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+### Ambiente de Desenvolvimento
+---
 
-### How do I get set up? ###
+### Estrutura de Pastas
+---
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+1. Componentes - componentes usados por toda aplicação
+```
+src
+├── components (componentes usados mais de 1x por página)
+│   │── Login
+│       │── index.js
+│       └── index.js
+├── assets (arquivos estruturais)
+│   │── images
+│   │── icons
+│   └── fonts
+├── config (configurações de env, add-ons, etc...)
+├── services (configurações de serviços de APIs)
+├── store (configurações dos Hooks Providers)
+│   config
+├── main.dev.css
+└── main.js
+```
 
-### Contribution guidelines ###
+### Stack
+---
 
-* Writing tests
-* Code review
-* Other guidelines
+1. React Native 0.64
+1. Storybook
+1. 
 
-### Who do I talk to? ###
+## Regras do Repositório
+---
 
-* Repo owner or admin
-* Other community or team contact
+## Estrutura de Pastas
+---
+
+## Tags & Releases
+---
+
+1. Versão 0.0.1
