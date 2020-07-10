@@ -1,13 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-
+import Stories from './storybook'
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Agenda 4 Pets teste</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Stories/>
+    // <View style={styles.container}>
+    //   <Text>Agenda 4 Pets testes</Text>
+    //   <StatusBar style="auto" />
+    // </View>
   );
 }
 
