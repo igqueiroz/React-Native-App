@@ -7,8 +7,10 @@ import {
   CarouselDots,
   CarouselImagesContainer,
   CarouselView,
-  CarouselImages
+  CarouselImages,
+  CarouselLogin
 } from './style';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
@@ -47,12 +49,24 @@ const MyCarousel = (props) => {
           {...parallaxProps}
         />
         { item.title && (
-          <>
-            <Text numberOfLines={3}>
-              {item.title}
+          <LinearGradient
+            colors={['#4c669f', '#3b5998', '#192f6a']}
+            style={{ padding: 15, alignItems: 'center', borderRadius: 5 }}>
+            <Text
+              style={{
+                backgroundColor: 'transparent',
+                fontSize: 15,
+                color: '#fff',
+              }}>
+              Sign in with Facebook
             </Text>
-            {/* <TextInput style={styles.input}></TextInput> */}
-          </>
+          </LinearGradient>
+          // <LinearGradient colors={['#FCB314', '#ED1C24']} >
+          //   <CarouselLogin>
+            
+          //       <Text>{item.title}</Text>
+          //   </CarouselLogin>
+          // </LinearGradient>
         ) }
       </CarouselItem>
     );
@@ -69,7 +83,7 @@ const MyCarousel = (props) => {
         renderItem={renderItem}
         onSnapToItem={(index) => setactiveDot(index)}
         hasParallaxImages={true}
-        layout={'tinder'}
+        layout={'stack'}
         layoutCardOffset={`1`}
       />
       {pagination()}

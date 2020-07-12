@@ -47,16 +47,18 @@ const CarouselImages = {
   ...StyleSheet.absoluteFillObject,
   resizeMode: 'contain',
 }
-// input: {
-//     zIndex: 3,
-//     borderStyle: 'solid',
-//     borderWidth: 1,
-//     marginHorizontal: 30,
-//     backgroundColor: '#ff990044',
-//     borderRadius: 10,
-//     marginBottom: -50,
-//     top: -(screenHeight / 1.5 - 20),
-//   }
+
+const CarouselLogin = styled.View`
+  zIndex: 3;
+  borderStyle: solid;
+  borderWidth: 1;
+  marginHorizontal: 30;
+  borderRadius: 10;
+  marginBottom: -50;
+  top: ${-(screenHeight / 1.5 - 20)};
+`
+
+
 
 module.exports = { 
   CarouselContainer,
@@ -64,5 +66,6 @@ module.exports = {
   CarouselDots,
   CarouselImagesContainer,
   CarouselView,
-  CarouselImages
+  CarouselImages,
+  CarouselLogin
 }
