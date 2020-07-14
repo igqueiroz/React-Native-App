@@ -34,11 +34,8 @@ const carouselItems = [
   },
   {
     illustration: require('../../src/assets/images/slider3.png'),
-  },
-  {
-    illustration: require('../../src/assets/images/slider4.png'),
     title: 'Faça sua conta',
     subtitle: 'Lorem ipsum dolor sit amet',
-  },
+  }
 ]
 storiesOf('Carousel', module).add('Welcome Window', () =>  <Carousel carouselItems={carouselItems}/>);

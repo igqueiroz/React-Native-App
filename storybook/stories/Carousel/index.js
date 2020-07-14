@@ -1,5 +1,5 @@
 import React, {useState, useRef, useEffect } from 'react';
-import { Dimensions, StyleSheet, TextInput, Text, View } from 'react-native';
+import { Dimensions, StyleSheet, TextInput, Text, View, Image } from 'react-native';
 import Carousel, { ParallaxImage, Pagination } from 'react-native-snap-carousel';
 import { 
   CarouselItem,
@@ -8,7 +8,8 @@ import {
   CarouselImagesContainer,
   CarouselView,
   CarouselImages,
-  CarouselLogin
+  CarouselStyledButtons,
+  Start
 } from './style';
 import { LinearGradient } from 'expo-linear-gradient';
 
@@ -49,24 +50,12 @@ const MyCarousel = (props) => {
           {...parallaxProps}
         />
         { item.title && (
-          <LinearGradient
-            colors={['#4c669f', '#3b5998', '#192f6a']}
-            style={{ padding: 15, alignItems: 'center', borderRadius: 5 }}>
-            <Text
-              style={{
-                backgroundColor: 'transparent',
-                fontSize: 15,
-                color: '#fff',
-              }}>
-              Sign in with Facebook
-            </Text>
-          </LinearGradient>
-          // <LinearGradient colors={['#FCB314', '#ED1C24']} >
-          //   <CarouselLogin>
-            
-          //       <Text>{item.title}</Text>
-          //   </CarouselLogin>
-          // </LinearGradient>
+          <Start>
+            <Image
+              style={CarouselStyledButtons.tinyLogo}
+              source={require('../../../src/assets/images/agendapets_logo.png')}
+            />
+          </Start>
         ) }
       </CarouselItem>
     );

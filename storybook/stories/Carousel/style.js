@@ -1,7 +1,6 @@
 import { Dimensions, Platform, StyleSheet } from 'react-native';
 import styled from 'styled-components';
 
-const largura = Dimensions.get('screen').width;
 const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
 
 const CarouselContainer = {
@@ -32,13 +31,6 @@ const CarouselView = styled.View`
   marginBottom: -10;
 `;
 
-const Title = styled.Text`
-  top: ${-(screenHeight / 1.5)};
-  color: white;
-  paddingHorizontal: 20;
-  textAlign: center;
-`;
-
 const CarouselItem = styled.View`
   width: ${screenWidth};
   height: ${screenHeight};
@@ -48,14 +40,8 @@ const CarouselImages = {
   resizeMode: 'contain',
 }
 
-const CarouselLogin = styled.View`
-  zIndex: 3;
-  borderStyle: solid;
-  borderWidth: 1;
-  marginHorizontal: 30;
-  borderRadius: 10;
-  marginBottom: -50;
-  top: ${-(screenHeight / 1.5 - 20)};
+const Start = styled.View`
+  
 `
 
 
@@ -67,5 +53,5 @@ module.exports = {
   CarouselImagesContainer,
   CarouselView,
   CarouselImages,
-  CarouselLogin
+  Start
 }
