@@ -1,7 +1,5 @@
-import { Dimensions } from 'react-native';
-const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
-
 const CarouselStyledButtons = {
+    gradientFacebook: ['#4c669f', '#3b5998', '#192f6a'],
     gradientAgenda: ['#FCB314', '#ED1C24'],
     styleGradient: { 
       padding: 15, 
@@ -14,6 +12,9 @@ const CarouselStyledButtons = {
       borderRadius: 10,
       marginBottom: -50,
     },
+    styleTopFacebook: {
+      top: -(screenHeight / 1.5 - 150)
+    },
     styleTopAgenda: {
       top: -(screenHeight / 1.5 - 140)
     },
@@ -21,7 +22,10 @@ const CarouselStyledButtons = {
       backgroundColor: 'transparent',
       fontSize: 15,
       color: '#fff',
+    },
+    tinyLogo: {
+      top: -(screenHeight / 1.8),
+      alignItems: 'center',
+      left: screenWidth/7,
     }
   }
-
-  module.exports = CarouselStyledButtons

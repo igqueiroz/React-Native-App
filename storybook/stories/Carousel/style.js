@@ -28,7 +28,7 @@ const CarouselImagesContainer = {
 const CarouselView = styled.View`
   flex: 1;
   backgroundColor: black;
-  marginBottom: -10;
+  marginBottom: -10px;
 `;
 
 const CarouselItem = styled.View`
@@ -40,10 +40,54 @@ const CarouselImages = {
   resizeMode: 'contain',
 }
 
-const Start = styled.View`
-  
-`
+const StartButton = {
+  gradientAgenda: ['#FCB314', '#ED1C24'],
+  style: { 
+    padding: 15, 
+    alignItems: 'center', 
+    borderRadius: 5, 
+    marginHorizontal: 30, 
+    bottom: 210, 
+    marginBottom: -70 
+  },
+  textStyle: {
+    backgroundColor: 'transparent',
+    fontSize: 16,
+    color: '#fff',
+    fontWeight: 'bold',
+  }
+}
 
+const CarouselStyledButtons = {
+  
+  styleGradient: { 
+    padding: 15, 
+    alignItems: 'center', 
+    borderRadius: 5,
+    zIndex: 3,
+    borderStyle: 'solid',
+    borderWidth: 0,
+    marginHorizontal: 30,
+    borderRadius: 10,
+    marginBottom: -50,
+  },
+  styleTopFacebook: {
+    top: -(screenHeight / 1.5 - 150)
+  },
+  styleTopAgenda: {
+    top: -(screenHeight / 1.5 - 140)
+  },
+  styleButton: {
+    backgroundColor: 'transparent',
+    fontSize: 15,
+    color: '#fff',
+  },
+  tinyLogo: {
+    top: -(screenHeight / 1.8),
+    alignItems: 'center',
+    left: screenWidth/7,
+  }
+}
 
 
 module.exports = { 
@@ -53,5 +97,6 @@ module.exports = {
   CarouselImagesContainer,
   CarouselView,
   CarouselImages,
-  Start
+  CarouselStyledButtons,
+  StartButton
 }

@@ -1,5 +1,5 @@
 import React, {useState, useRef, useEffect } from 'react';
-import { Dimensions, StyleSheet, TextInput, Text, View, Image } from 'react-native';
+import { Dimensions, StyleSheet, TextInput, Text, View, Image, TouchableOpacity, TouchableNativeFeedback } from 'react-native';
 import Carousel, { ParallaxImage, Pagination } from 'react-native-snap-carousel';
 import { 
   CarouselItem,
@@ -8,8 +8,7 @@ import {
   CarouselImagesContainer,
   CarouselView,
   CarouselImages,
-  CarouselStyledButtons,
-  Start
+  StartButton
 } from './style';
 import { LinearGradient } from 'expo-linear-gradient';
 
@@ -39,6 +38,10 @@ const MyCarousel = (props) => {
     setEntries(carouselItems);
   }, []);
 
+  const changePage = () => {
+    alert('aqui')
+  }
+
   const renderItem = ({ item }, parallaxProps) => {
     return (
       <CarouselItem>
@@ -50,12 +53,17 @@ const MyCarousel = (props) => {
           {...parallaxProps}
         />
         { item.title && (
-          <Start>
-            <Image
-              style={CarouselStyledButtons.tinyLogo}
-              source={require('../../../src/assets/images/agendapets_logo.png')}
-            />
-          </Start>
+            <LinearGradient
+              colors={StartButton.gradientAgenda}
+              style={StartButton.style}
+              >
+              <Text
+                style={StartButton.textStyle}>
+                Começar
+              </Text>
+            </LinearGradient>
+          
+
         ) }
       </CarouselItem>
     );
