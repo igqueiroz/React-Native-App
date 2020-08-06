@@ -1,34 +1,60 @@
-import CarouselStyledButtons from './style';
-alert(CarouselStyledButtons)
+import React from 'react';
+import { Image, Text, View, ImageBackground, TouchableOpacity } from 'react-native';
+import LoginStyle from './style';
+import { LinearGradient } from 'expo-linear-gradient';
+const imageBackground = require('../../../src/assets/images/login.png')
+
+const alertFunc = () => {
+  alert('teste')
+}
+
 const Login = (props) => {
 return (
-    <>
+    <ImageBackground source={imageBackground} style={LoginStyle.background} >
       <Image
-        style={CarouselStyledButtons.tinyLogo}
         source={require('../../../src/assets/images/agendapets_logo.png')}
       />
-      <LinearGradient
-        colors={CarouselStyledButtons.gradientAgenda}
-        style={[CarouselStyledButtons.styleGradient, CarouselStyledButtons.styleTopAgenda ]}
+      <View style={LoginStyle.view}>
+        <LinearGradient
+          colors={LoginStyle.gradientAgenda}
+          style={[LoginStyle.styleGradient ]}
+        >
+          <TouchableOpacity onPress={alertFunc}>
+            <Text
+              style={LoginStyle.styleButton}>
+              Cadastre-se
+            </Text>
+          </TouchableOpacity>
+        </LinearGradient>
+        <LinearGradient
+          colors={LoginStyle.gradientAgenda}
+          style={[LoginStyle.styleGradient ]}
+        >
+          <TouchableOpacity onPress={alertFunc}>
+            <Text
+              style={LoginStyle.styleButton}>
+              Já possuo conta
+            </Text>
+          </TouchableOpacity>
+        </LinearGradient>
+      </View>
+      <View style={LoginStyle.loginStyleRow}
       >
-        <Text
-          style={CarouselStyledButtons.styleButton}>
-          Entrar com Facebook
-        </Text>
-      </LinearGradient>
-      <LinearGradient
-        colors={CarouselStyledButtons.gradientFacebook}
-        style={[
-          CarouselStyledButtons.styleGradient,
-          CarouselStyledButtons.styleTopFacebook
-        ]}
-      >
-        <Text
-          style={CarouselStyledButtons.tinyLogo}>
-          Entrar com Facebook
-        </Text>
-      </LinearGradient>
-    </>
+        <LinearGradient
+          colors={LoginStyle.gradientFacebook}
+          style={[
+            LoginStyle.styleGradient
+          ]}
+        >
+          <TouchableOpacity onPress={alertFunc}>
+            <Text
+              style={{...LoginStyle.styleButton, ...LoginStyle.styleButtonFb}}>
+              Logar com Facebook
+            </Text>
+          </TouchableOpacity>
+        </LinearGradient>
+      </View>
+    </ImageBackground>
   )
 }
 

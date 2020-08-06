@@ -1,5 +1,5 @@
 import React, {useState, useRef, useEffect } from 'react';
-import { Dimensions, StyleSheet, TextInput, Text, View, Image, TouchableOpacity, TouchableNativeFeedback } from 'react-native';
+import { Dimensions, Text, TouchableOpacity, Image } from 'react-native';
 import Carousel, { ParallaxImage, Pagination } from 'react-native-snap-carousel';
 import { 
   CarouselItem,
@@ -39,7 +39,7 @@ const MyCarousel = (props) => {
   }, []);
 
   const changePage = () => {
-    alert('aqui')
+    return alert('XUXAAAAAAAAAAAAAAAAAAA AAAAAA')
   }
 
   const renderItem = ({ item }, parallaxProps) => {
@@ -57,13 +57,14 @@ const MyCarousel = (props) => {
               colors={StartButton.gradientAgenda}
               style={StartButton.style}
               >
-              <Text
-                style={StartButton.textStyle}>
-                Começar
-              </Text>
+              <TouchableOpacity onPress={changePage} style={StartButton.items}>
+                <Text
+                  style={StartButton.textStyle}>
+                  Começar
+                </Text>
+                <Image source={require("../../../src/assets/images/white-arrow-right.png")} style={StartButton.imgSendStyle} />
+              </TouchableOpacity>
             </LinearGradient>
-          
-
         ) }
       </CarouselItem>
     );

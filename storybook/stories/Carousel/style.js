@@ -42,24 +42,28 @@ const CarouselImages = {
 
 const StartButton = {
   gradientAgenda: ['#FCB314', '#ED1C24'],
-  style: { 
-    padding: 15, 
-    alignItems: 'center', 
+  style: {
     borderRadius: 5, 
-    marginHorizontal: 30, 
+    marginHorizontal: 30,
     bottom: 210, 
     marginBottom: -70 
   },
   textStyle: {
+    textAlign: 'center',
     backgroundColor: 'transparent',
     fontSize: 16,
     color: '#fff',
     fontWeight: 'bold',
+    padding: 15
+  },
+  items: {
+    flexDirection: "row", 
+    justifyContent: "center", 
+    alignItems: "center"
   }
 }
 
 const CarouselStyledButtons = {
-  
   styleGradient: { 
     padding: 15, 
     alignItems: 'center', 
