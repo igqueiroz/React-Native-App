@@ -2,14 +2,21 @@ import React from 'react';
 import { Image, Text, View, ImageBackground, TouchableOpacity } from 'react-native';
 import LoginStyle from './style';
 import { LinearGradient } from 'expo-linear-gradient';
-const imageBackground = require('../../../src/assets/images/login.png')
+import { useState } from 'react';
+const imageBackground = require('../../../src/assets/images/login.png');
 
 const alertFunc = () => {
   alert('teste')
 }
 
 const Login = (props) => {
-return (
+  const registerPage = ({ page }) => {
+    const [changePage, setChangePage ] = useState(page);
+  
+    setChangePage([newChange]);
+  }
+
+  return (
     <ImageBackground source={imageBackground} style={LoginStyle.background} >
       <Image
         source={require('../../../src/assets/images/agendapets_logo.png')}
@@ -19,7 +26,7 @@ return (
           colors={LoginStyle.gradientAgenda}
           style={[LoginStyle.styleGradient ]}
         >
-          <TouchableOpacity onPress={alertFunc}>
+          <TouchableOpacity onPress={registerPage}>
             <Text
               style={LoginStyle.styleButton}>
               Cadastre-se
