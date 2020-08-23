@@ -54,15 +54,15 @@ const MyCarousel = (props) => {
         />
         { item.title && (
             <LinearGradient
-              colors={StartButton.gradientAgenda}
-              style={StartButton.style}
+              colors={ StartButton.gradientAgenda }
+              style={ StartButton.style }
               >
-              <TouchableOpacity onPress={changePage} style={StartButton.items}>
+              <TouchableOpacity onPress={ changePage } style={ StartButton.items } >
                 <Text
-                  style={StartButton.textStyle}>
+                  style={ StartButton.textStyle }>
                   Começar
                 </Text>
-                <Image source={require("../../../src/assets/images/white-arrow-right.png")} style={StartButton.imgSendStyle} />
+                <Image source={ require("../../../src/assets/images/white-arrow-right.png") } style={ StartButton.imgSendStyle } />
               </TouchableOpacity>
             </LinearGradient>
         ) }

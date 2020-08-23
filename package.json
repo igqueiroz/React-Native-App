@@ -3,13 +3,16 @@
   "version": "0.0.1",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "expo start",
+    "start": "expo start ",
+    "start:debug:windows": "set 'NODE_ENV=development' && expo start ",
+    "start:debug": "NODE_ENV=development expo start ",
     "web": "expo start --web",
     "eject": "expo eject",
     "test": "jest",
     "storybook": "start-storybook"
   },
   "dependencies": {
+    "@react-navigation/stack": "^5.9.0",
     "async-storage": "^0.1.0",
     "expo": "~38.0.8",
     "expo-status-bar": "^1.0.2",
@@ -21,6 +24,7 @@
     "react-native-safe-area-view": "^1.1.1",
     "react-native-snap-carousel": "^3.9.0",
     "react-native-web": "~0.11.7",
+    "react-navigation-stack": "^2.8.2",
     "styled-components": "^5.1.1"
   },
   "devDependencies": {
@@ -36,6 +40,7 @@
     "@testing-library/react-native": "^7.0.1",
     "babel-jest": "^26.0.1",
     "babel-loader": "^8.1.0",
+    "babel-plugin-transform-inline-environment-variables": "^0.4.3",
     "babel-preset-expo": "~8.1.0",
     "eslint": "^7.0.0",
     "jest": "^26.0.1",
