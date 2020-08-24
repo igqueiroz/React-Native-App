@@ -14,6 +14,7 @@ const AppContainer = createAppContainer(navigator)
 const App = () => {
   return (
     <>
+      <StatusBar style="light" animated={true} backgroundColor="#333333" />
       <AppContainer />
     </>
   )
