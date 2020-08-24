@@ -8,17 +8,13 @@ const envMode = env.NODE_ENV;
 const devMode = (envMode === "development") ? true: false
 const production = <Text>Production</Text>
 
-const Debug = ( { navigation, children } ) => {
-    const onPress = ({ props }) => {
-        console.log(props)
-        navigation.push("Stories")
-    }
+const Debug = ( { navigation } ) => {
     return (
         <View style={ styles.container }>
             <View style={ styles.wrapper }>
                 <Image source={ require("../../assets/images/agendapets_logo.png") } style={ styles.logo } />
-                <Button onPress={ onPress } text="Storybook"><Text style={ styles.text }>Storybook</Text></Button>
-                <Button onPress={ onPress } text="Demo"><Text style={ styles.text }>Demo</Text></Button>
+                <Button goScreen="Stories" navigation={ navigation }><Text style={ styles.text }>Storybook</Text></Button>
+                <Button goScreen="Demo" navigation={ navigation }><Text style={ styles.text }>Demo</Text></Button>
             </View>
         </View>
     )

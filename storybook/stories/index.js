@@ -7,6 +7,9 @@ import Welcome from './Welcome';
 import Carousel from './Carousel';
 import Login from './Login';
 
+//\node_modules\@storybook\react-native\dist\preview\components\StoryListView\index.js
+// var SearchBar=_native["default"].TextInput("border-top-left-radius:5px;border-top-right-radius:5px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;font-size:16px;margin-horizontal:5px;margin-vertical:5px;padding-horizontal:5px;padding-vertical:5px;margin-top: 90px");
+
 storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
 
 const carouselItems = [
