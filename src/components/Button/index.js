@@ -4,15 +4,15 @@ import { TouchableOpacity, View } from 'react-native';
 import { StyleButton, gradientAgenda, touchWrapper } from './style';
 import { LinearGradient } from 'expo-linear-gradient';
 
-const Button = ({ onPress, children }) => {
-  Button.defaultProps = {
-    children: null
-  };
+const Button = ({ children, goScreen, navigation }) => {
+  const ChangePage = () => {
+    navigation.push(goScreen)
+  }
 
   return (
     <View>
       <LinearGradient colors={ gradientAgenda } style={ touchWrapper }>
-        <TouchableOpacity style={ StyleButton.common } onPress={ onPress }>
+        <TouchableOpacity style={ StyleButton.common } onPress={ ChangePage } >
           { children }
         </TouchableOpacity>
       </LinearGradient>
@@ -22,6 +22,10 @@ const Button = ({ onPress, children }) => {
 
 export default Button;
 
+Button.defaultProps = {
+  children: null,
+  onPress: () => {}
+};
 
 Button.propTypes = {
   children: PropTypes.node,
