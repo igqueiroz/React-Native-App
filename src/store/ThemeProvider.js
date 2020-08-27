@@ -32,4 +32,4 @@ const colors = {
     
 }
 
-export const ThemeContext = createContext()
+export const ThemeProvider = createContext(navigationOptions, colors)

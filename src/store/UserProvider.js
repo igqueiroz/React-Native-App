@@ -8,4 +8,4 @@ const user = {
     
 }
 
-export const UserContext = createContext()
+export const UserProvider = createContext()

@@ -4,8 +4,8 @@
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start ",
-    "start:debug:windows": "set 'NODE_ENV=development' && expo start ",
-    "start:debug": "NODE_ENV=development expo start ",
+    "start:local:windows": "set 'NODE_ENV=development' && expo start ",
+    "start:local": "NODE_ENV=development expo start ",
     "web": "expo start --web",
     "eject": "expo eject",
     "test": "jest",
