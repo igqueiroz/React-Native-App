@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect } from 'react';
+import React, {useState, useRef, useEffect, useContext } from 'react';
 import { Dimensions, Text, TouchableOpacity, Image } from 'react-native';
 import Carousel, { ParallaxImage, Pagination } from 'react-native-snap-carousel';
 import { 
@@ -13,6 +13,7 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import Button from '../../components/Button';
 import { View } from 'react-native-animatable';
+import { ConfigContext } from '../../store/ConfigProvider'
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
@@ -87,6 +88,8 @@ const MyCarousel = (props) => {
 };
 
 const Welcome = (props) => {
+  const net = useContext(ConfigContext);
+  console.log(777, net)
   return (
     <>
       <MyCarousel carouselItems={props.carouselItems} navigation={props.navigation}/>

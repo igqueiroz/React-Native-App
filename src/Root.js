@@ -25,11 +25,11 @@ const Root = ( { navigation} ) => {
     // WIP - Autenticação
     //  return user ? <Profile /> : <Login />
   return (
-    //<ConfigProvider>
-      //<ThemeProvider>
+    <ConfigProvider>
+      
         <Welcome carouselItems={ carouselItems } navigation={ navigation } />
-      //</ThemeProvider>
-    //</ConfigProvider>
+      
+    </ConfigProvider>
   )
 }
 

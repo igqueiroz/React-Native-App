@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.10",
+    "@react-native-community/netinfo": "^5.9.6",
     "@react-navigation/stack": "^5.9.0",
     "async-storage": "^0.1.0",
     "expo": "~38.0.8",
@@ -31,7 +32,6 @@
     "styled-components": "^5.1.1"
   },
   "devDependencies": {
-    "jest-expo": "^37.0.0",
     "@babel/core": "^7.9.6",
     "@babel/runtime": "^7.9.6",
     "@react-native-community/eslint-config": "^1.1.0",
@@ -49,6 +49,7 @@
     "babel-preset-expo": "~8.1.0",
     "eslint": "^7.0.0",
     "jest": "^26.0.1",
+    "jest-expo": "^37.0.0",
     "metro-react-native-babel-preset": "^0.59.0",
     "react-dom": "16.11.0",
     "react-test-renderer": "16.11.0"
