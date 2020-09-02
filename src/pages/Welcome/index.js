@@ -13,15 +13,19 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import Button from '../../components/Button';
 import { View } from 'react-native-animatable';
-import { ConfigContext } from '../../store/ConfigProvider'
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
 const MyCarousel = (props) => {
   const { carouselItems, navigation } = props;
+  console.log('>>>', navigation)
   const [ entries, setEntries ] = useState([]);
   const [ activeDot, setactiveDot ] = useState(0);
   const carouselRef = useRef( null );
+
+  const setUserFirstTime = () => {
+    alert('OFF');
+  }
 
   const pagination = () => {
     return (
@@ -88,8 +92,6 @@ const MyCarousel = (props) => {
 };
 
 const Welcome = (props) => {
-  const net = useContext(ConfigContext);
-  console.log(777, net)
   return (
     <>
       <MyCarousel carouselItems={props.carouselItems} navigation={props.navigation}/>

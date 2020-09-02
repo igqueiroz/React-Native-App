@@ -24,7 +24,7 @@ export const ConfigProvider = ({ children }) => {
         updated: true,          // boolean
         tag: '0.1.0 ',          // tag release = git version tag
         apiVersion: '',         // current version of BFF API
-        userFistTime: '',
+        userFirstTime: true,
         network: net
     }
     return (

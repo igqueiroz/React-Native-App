@@ -4,31 +4,31 @@ import React from 'react';
 import Stories from './storybook';
 import Debug from './src/pages/Debug';
 import Welcome from './src/pages/Welcome';
+import FirstPageLogic from './src/pages/FirstPageLogic';
 import Login from './src/pages/Login';
 import { createStackNavigator } from "react-navigation-stack";
 import { createAppContainer } from "react-navigation";
 import Routes from './src/Root';
 
-const navigator = createStackNavigator({
-  Debug: { screen: Debug },
+const env = process.env;
+const envMode = env.NODE_ENV;
+const devMode = (envMode === "development") ? true: false;
+const debug = { Debug: { screen: Debug } };
+const routes = {
   Routes: { screen: Routes },
   Stories: { screen: Stories },
   Welcome: { screen: Welcome },
+  FirstPageLogic: { screen: FirstPageLogic},
   Login: { screen: Login }
-})
-const AppContainer = createAppContainer(navigator);
-
+}
+const navigator = (devMode) ? createStackNavigator({...debug, ...routes}) : createStackNavigator(routes)
+// Verifica se está em modo dev para ir ao modo Debug
+const AppContainer = createAppContainer(navigator)
 const App = () => {
-  const env = process.env;
-  const envMode = env.NODE_ENV;
-  const devMode = (envMode === "development") ? true: false;
-  // const Production = () => { return (<View style={{justifyContent: "center", alignItems: "center", flex: 1}}><Text>Production</Text></View>) };
-  const FirstPage = (devMode) ? AppContainer : Routes;
-
   return (
     <>
       <StatusBar style="light" animated={true} backgroundColor="#333333" />
-      <FirstPage />
+      <AppContainer />
     </>
   )
 }
