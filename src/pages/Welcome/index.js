@@ -1,5 +1,5 @@
 import React, {useState, useRef, useEffect, useContext } from 'react';
-import { Dimensions, Text, TouchableOpacity, Image } from 'react-native';
+import { Dimensions, Text, Image } from 'react-native';
 import Carousel, { ParallaxImage, Pagination } from 'react-native-snap-carousel';
 import { 
   CarouselItem,
@@ -18,14 +18,10 @@ const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
 const MyCarousel = (props) => {
   const { carouselItems, navigation } = props;
-  console.log('>>>', navigation)
   const [ entries, setEntries ] = useState([]);
   const [ activeDot, setactiveDot ] = useState(0);
+  const [ firstTime, setfirstTime ] = useState(true);
   const carouselRef = useRef( null );
-
-  const setUserFirstTime = () => {
-    alert('OFF');
-  }
 
   const pagination = () => {
     return (
@@ -84,7 +80,7 @@ const MyCarousel = (props) => {
         onSnapToItem={(index) => setactiveDot(index)}
         hasParallaxImages={true}
         layout={'stack'}
-        layoutCardOffset={`1`}
+        layoutCardOffset={1}
       />
       {pagination()}
     </CarouselView>

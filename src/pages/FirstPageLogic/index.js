@@ -3,6 +3,7 @@ import { View, Text } from 'react-native';
 import Welcome from '../Welcome';
 import { Login } from '../Login';
 import { ConfigContext } from '../../store/ConfigProvider';
+import { ThemeContext } from '../../store/ThemeProvider';
 import { AuthProvider } from '../../store/AuthProvider';
 
 const carouselItems = [
@@ -24,6 +25,8 @@ const Profile = () => {
 
 const FirstPageLogic = ( { navigation} ) => {
     const config = useContext(ConfigContext);
+    const theme = useContext(ThemeContext);
+    console.log('XXXX ', theme )
     // Verifica se é a primeira vez que usa o App depois de atualizar
     if (config.userFirstTime === true) {
       return <Welcome carouselItems={ carouselItems } navigation={ navigation } />

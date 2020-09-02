@@ -1,35 +1,30 @@
 import React, { createContext } from 'react'
 import { Platform } from 'react-native';
+export const ThemeContext = createContext();
 
-const navigationOptions = () => {
-    const opt = {
-        title: 'teste',
+export const ThemeProvider = ({ children }) => {
+    const colors = {
+        light: {
+            primary: '',
+            secondary: '',
+            buttonGradientCommon: '',
+            background: ''
+        },
+        dark: {
+            primary: '',
+            secondary: '',
+            buttonGradientCommon: '',
+            background: ''
+        },
+        statusBar: {
+            height: '11'
+        }
     }
 
-    if (Platform.OS === "android") {
-        opt.header = null
-    }
-    
-    return opt
-}
-
-const colors = {
-    light: {
-        primary: '',
-        secondary: '',
-        buttonGradientCommon: '',
-        background: ''
-    },
-    dark: {
-        primary: '',
-        secondary: '',
-        buttonGradientCommon: '',
-        background: ''
-    },
-    statusBar: {
-        height: ''
-    }
+    return (
+        <ThemeContext.Provider value={colors}>
+            { children }   
+        </ThemeContext.Provider>
+    )
     
 }
-
-export const ThemeProvider = createContext(navigationOptions, colors)

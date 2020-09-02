@@ -1,13 +1,15 @@
 import React, { useContext } from 'react';
 import { ConfigProvider } from './store/ConfigProvider';
+import { ThemeProvider } from './store/ThemeProvider';
 import FirstPageLogic from './pages/FirstPageLogic';
-import { navigate } from '@storybook/addon-links/dist/preview';
 
 const Root = ( { navigation } ) => {
   return (
-    <ConfigProvider>
-      <FirstPageLogic navigation={navigation} />
-    </ConfigProvider>
+    <ThemeProvider>
+      <ConfigProvider>
+        <FirstPageLogic navigation={navigation} />
+      </ConfigProvider>
+    </ThemeProvider>
   )
 }
 

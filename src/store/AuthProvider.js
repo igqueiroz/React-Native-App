@@ -9,7 +9,8 @@ export const AuthProvider = ({ children }) => {
         expirationDate: '',
         name: '',
         email: '',
-        id: ''
+        id: '',
+        purgePassword: false
     }
     return (
         <AuthContext.Provider value={[state, setState]}>
