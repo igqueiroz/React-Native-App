@@ -1,19 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { TouchableOpacity, View } from 'react-native';
 import { StyleButton, gradientAgenda, touchWrapper } from './style';
 import { LinearGradient } from 'expo-linear-gradient';
 
-const Button = ({ children, goScreen, navigation }) => {
+const Button = (props) => {
+  const execute = () => {
+    props.execute.state.stateUpdate(props.execute.newState)
+  }
+
   const ChangePage = () => {
-    navigation.push(goScreen)
+    if (props.execute) execute()
+    props.navigation.push(props.goScreen)
   }
 
   return (
     <View>
       <LinearGradient colors={ gradientAgenda } style={ touchWrapper }>
         <TouchableOpacity style={ StyleButton.common } onPress={ ChangePage } >
-          { children }
+          { props.children }
         </TouchableOpacity>
       </LinearGradient>
     </View>

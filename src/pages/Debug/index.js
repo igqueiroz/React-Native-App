@@ -4,6 +4,7 @@ import { Text, View, Image, Platform } from 'react-native';
 import styles from './style'
 
 const Debug = ( { navigation } ) => {
+    
     return (
         <View style={ styles.container }>
             <View style={ styles.wrapper }>
@@ -23,6 +24,7 @@ Debug.navigationOptions = () => {
     if (Platform.OS === "android") {
         opt.headerShown = false
     }
+    console.log('DEBUG')
     return opt;
 }
 
