@@ -13,16 +13,19 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import Button from '../../components/Button';
 import { View } from 'react-native-animatable';
+import { ConfigContext } from '../../store/ConfigProvider';
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
+
 const MyCarousel = (props) => {
+  const config = useContext(ConfigContext);
+  const updateConfig = { userFirstTime: false }
   const { carouselItems, navigation } = props;
   const [ entries, setEntries ] = useState([]);
   const [ activeDot, setactiveDot ] = useState(0);
-  const [ firstTime, setfirstTime ] = useState(true);
   const carouselRef = useRef( null );
-
+  
   const pagination = () => {
     return (
       <Pagination
@@ -56,7 +59,7 @@ const MyCarousel = (props) => {
               colors={ StartButton.gradientAgenda }
               style={ StartButton.style }
               >
-                <Button goScreen="Login" navigation={ navigation } >
+                <Button goScreen="Login" navigation={ navigation } execute={ {state: config, newState: updateConfig } } >
                   <View style={StartButton.items}>
                     <Text style={StartButton.textStyle}>Começar</Text>
                     <Image source={ require("../../../src/assets/images/white-arrow-right.png") } style={ StartButton.imgSendStyle } />
@@ -88,18 +91,14 @@ const MyCarousel = (props) => {
 };
 
 const Welcome = (props) => {
-  return (
-    <>
-      <MyCarousel carouselItems={props.carouselItems} navigation={props.navigation}/>
-    </>
-  );
+  return <MyCarousel carouselItems={props.carouselItems} navigation={props.navigation}/>
 };
 
 Welcome.navigationOptions = () => {
   const opt = {
     headerShown: false,
   }
-
+  console.log('WELCOME')
   return opt;
 }
 
