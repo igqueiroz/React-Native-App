@@ -1,30 +1,26 @@
-import React, { useContext} from 'react';
+import React, { memo, useContext} from 'react';
 import { Image, Text, View, ImageBackground, TouchableOpacity } from 'react-native';
 import LoginStyle from './style';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useState } from 'react';
-import { AuthProvider, AuthContext } from '../../store/AuthProvider';
+import { AuthContext } from '../../store/AuthProvider';
 const imageBackground = require('../../../src/assets/images/login.png');
 
-
-
 const Login = (props) => {
-  
-  // const [user, setUser] = useContext(AuthContext);
-  
-  // const alertFunc = () => {
-  //   alert('teste')
-  // }
+  const [user, setUser] = useContext(AuthContext);
+  const alertFunc = () => {
+    alert('teste')
+  }
 
-  // const registerPage = ({ page }) => {
-  //   const [changePage, setChangePage ] = useState(page);
+  const registerPage = ({ page }) => {
+    const [changePage, setChangePage ] = useState(page);
   
-  //   setChangePage([newChange]);
-  // }
+    setChangePage([newChange]);
+  }
 
   return (
     <ImageBackground source={imageBackground} style={LoginStyle.background} >
-      {/* <Image
+      <Image
         source={require('../../../src/assets/images/agendapets_logo.png')}
       />
       <View style={LoginStyle.view}>
@@ -66,32 +62,31 @@ const Login = (props) => {
             </Text>
           </TouchableOpacity>
         </LinearGradient>
-      </View> */}
+      </View>
     </ImageBackground>
   )
 }
 
 Login.navigationOptions = () => {
-  // const opt = {
-  //   title: null,
-  //   headerStyle: {
-  //     position: 'absolute',
-  //     backgroundColor: 'transparent',
-  //     zIndex: 100,
-  //     top: 0,
-  //     left: 0,
-  //     right: 0,
-  //     elevation: 0,
-  //     shadowOpacity: 0,
-  //     borderBottomWidth: 0,
-  //   }
-  // }
+  const opt = {
+    title: null,
+    headerStyle: {
+      position: 'absolute',
+      backgroundColor: 'transparent',
+      zIndex: 100,
+      top: 0,
+      left: 0,
+      right: 0,
+      elevation: 0,
+      shadowOpacity: 0,
+      borderBottomWidth: 0,
+    }
+  }
 
-  // if (Platform.OS === "android") {
-  //     opt.headerShown = false
-  // }
-  // return opt;
-  console.log('LOGIN')
+  if (Platform.OS === "android") {
+      opt.headerShown = false
+  }
+  return opt;
 }
 
-export default Login;
+export default memo(Login);

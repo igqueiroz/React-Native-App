@@ -7,7 +7,7 @@ const Root = ( { navigation } ) => {
   return (
     <ThemeProvider>
       <ConfigProvider>
-        <FirstPageLogic navigation={navigation} />
+        <FirstPageLogic navigation={ navigation } />
       </ConfigProvider>
     </ThemeProvider>
   )

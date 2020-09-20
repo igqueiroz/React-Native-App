@@ -32,8 +32,8 @@ const CarouselView = styled.View`
 `;
 
 const CarouselItem = styled.View`
-  width: ${screenWidth};
-  height: ${screenHeight};
+  width: ${screenWidth}px;
+  height: ${screenHeight}px;
 `
 const CarouselImages = {
   ...StyleSheet.absoluteFillObject,

@@ -24,7 +24,6 @@ Debug.navigationOptions = () => {
     if (Platform.OS === "android") {
         opt.headerShown = false
     }
-    console.log('DEBUG')
     return opt;
 }
 

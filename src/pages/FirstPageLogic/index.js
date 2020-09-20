@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef, memo, useEffect, useState, useCallback } from 'react';
 import { View, Text } from 'react-native';
 import Welcome from '../Welcome';
 import Login from '../Login';
@@ -22,20 +22,23 @@ const Profile = () => {
   return (<View style={{justifyContent: "center", alignItems: "center", flex: 1}}><Text>DASHBOARD</Text></View>)
 }
 
-const verifyUserFirstTime = (props) => {
-  const config = useContext(ConfigContext);
-  // Verifica se é a primeira vez que usa o App depois de atualizar
-  // WIP
-  if (config.state.userFirstTime === true) {
+const ChooseFirstPage = (props) => {
+  if (props.userFirstTime) {
     return <Welcome carouselItems={ carouselItems } navigation={ props.navigation } />
   } else {
-    return <Login navigation={ props.navigation }/>
+    return <Login navigation={ props.navigation } />
   }
 }
 
-const FirstPageLogic = ( { navigation} ) => {
-    return <verifyUserFirstTime navigation={navigation} />
-    
+const FirstPageLogic = ( props ) => {
+  const { netInfo, userFirstTime } = useContext(ConfigContext);
+  // Exemplo para recuperação de detalhes da network
+  if (netInfo) console.log('Tipo do Celular', netInfo.details.carrier);
+  return (
+    <AuthProvider>
+      <ChooseFirstPage navigation={ props.navigation } userFirstTime={userFirstTime} />
+    </AuthProvider>
+  ) 
 }
 
 FirstPageLogic.navigationOptions = () => {
@@ -44,4 +47,4 @@ FirstPageLogic.navigationOptions = () => {
     }
     return opt;
 }
-export default FirstPageLogic;
+export default memo(FirstPageLogic);

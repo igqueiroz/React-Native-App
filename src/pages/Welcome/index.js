@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect, useContext } from 'react';
+import React, {useState, useRef, useEffect, useContext, memo } from 'react';
 import { Dimensions, Text, Image } from 'react-native';
 import Carousel, { ParallaxImage, Pagination } from 'react-native-snap-carousel';
 import { 
@@ -19,9 +19,8 @@ const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
 
 const MyCarousel = (props) => {
-  const config = useContext(ConfigContext);
-  const updateConfig = { userFirstTime: false }
-  const { carouselItems, navigation } = props;
+  const {carouselItems, navigation} = props;
+  const {updateUserFirstTime} = useContext(ConfigContext)
   const [ entries, setEntries ] = useState([]);
   const [ activeDot, setactiveDot ] = useState(0);
   const carouselRef = useRef( null );
@@ -59,7 +58,8 @@ const MyCarousel = (props) => {
               colors={ StartButton.gradientAgenda }
               style={ StartButton.style }
               >
-                <Button goScreen="Login" navigation={ navigation } execute={ {state: config, newState: updateConfig } } >
+                {/* <Button goScreen="Routes" navigation={ navigation } > */}
+                <Button goScreen="Routes" navigation={ navigation } execute={ updateUserFirstTime }>
                   <View style={StartButton.items}>
                     <Text style={StartButton.textStyle}>Começar</Text>
                     <Image source={ require("../../../src/assets/images/white-arrow-right.png") } style={ StartButton.imgSendStyle } />
@@ -75,8 +75,8 @@ const MyCarousel = (props) => {
     <CarouselView>
       <Carousel
         ref={carouselRef}
-        sliderWidth={screenWidth}
-        sliderHeight={screenHeight}
+        sliderWidth={parseFloat(screenWidth)}
+        sliderHeight={parseFloat(screenHeight)}
         itemWidth={screenWidth}
         data={entries}
         renderItem={renderItem}
@@ -98,8 +98,7 @@ Welcome.navigationOptions = () => {
   const opt = {
     headerShown: false,
   }
-  console.log('WELCOME')
   return opt;
 }
 
-export default Welcome;
+export default memo(Welcome);
