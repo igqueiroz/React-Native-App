@@ -1,4 +1,4 @@
-import React, { useContext, useRef, memo, useEffect, useState, useCallback } from 'react';
+import React, { useContext, memo } from 'react';
 import { View, Text, ActivityIndicator } from 'react-native';
 import Welcome from '../Welcome';
 import Login from '../Login';

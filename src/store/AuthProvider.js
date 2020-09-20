@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import login from '../api/login';
 export const AuthContext = createContext([false, () => {}]);
 
@@ -27,11 +27,11 @@ export const AuthProvider = ({ children }) => {
     }
 
     useEffect(() => {
-        loadStorageData()
+        // loadStorageData()
     }, [])
 
     return (
-        <AuthContext.Provider value={[state, setState]}>
+        <AuthContext.Provider value={[auth, setAuth]}>
             { children }   
         </AuthContext.Provider>
     )
