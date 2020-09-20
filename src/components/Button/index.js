@@ -6,8 +6,14 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 const Button = (props) => {
   const execute = () => {
-    console.log(props.execute())
-    // props.execute.state.stateUpdate(props.execute.newState);
+    switch (typeof props.execute) {
+      case ('function') :
+        props.execute()
+        break;
+      case ('object') :
+        props.execute.state.stateUpdate(props.execute.newState);
+        break;
+    }
   }
 
   const ChangePage = () => {

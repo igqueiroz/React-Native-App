@@ -32,18 +32,21 @@ export const ConfigProvider = ({ children }) => {
     async function loadStorageData() {
         const storageUser = await AsyncStorage.getItem('@Agenda4Pets:user');
         const storageToken = await AsyncStorage.getItem('@Agenda4Pets:token');
-        const userFirstTime = await AsyncStorage.getItem('@Agenda4Pets:userFirstTime')
-        const getUserFirstTime = (!userFirstTime) ? userFirstTime : AsyncStorage.setItem('@Agenda4Pets:userFirstTime', 'true');
+        const recoverUserFirstTime = await AsyncStorage.getItem('@Agenda4Pets:userFirstTime')
+        const getUserFirstTime = (recoverUserFirstTime || userFirstTime == null) ? recoverUserFirstTime : await AsyncStorage.setItem('@Agenda4Pets:userFirstTime', 'true');
         setUserFirstTime(getUserFirstTime)
     }
 
     async function updateUserFirstTime () {
         await AsyncStorage.setItem('@Agenda4Pets:userFirstTime', 'false');
-        return setUserFirstTime(false)
+        setUserFirstTime(false)
     }
 
     useEffect(() => {
         getNetwork()
+        // Teste para simular primeira entrada do usuário
+        // AsyncStorage.setItem('@Agenda4Pets:userFirstTime', 'true');
+        // AsyncStorage.getItem('@Agenda4Pets:userFirstTime').then((t) => console.log('type', t))
         loadStorageData()
     }, [])
     
