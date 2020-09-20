@@ -5,9 +5,10 @@ export const ConfigContext = createContext();
 
 export const ConfigProvider = ({ children }) => {
     
-    const [netInfo, setNetInfo ] = useState(null)
+    const [netInfo, setNetInfo ] = useState(null);
 
-    const [userFirstTime, setUserFirstTime] = useState(null)
+    const [userFirstTime, setUserFirstTime] = useState(null);
+    const [loading, setLoading] = useState(true)
     const apiInfo = {
         currentVersion: '',             // date
         latestVersion: '',              // date
@@ -30,16 +31,22 @@ export const ConfigProvider = ({ children }) => {
     }
        
     async function loadStorageData() {
-        const storageUser = await AsyncStorage.getItem('@Agenda4Pets:user');
-        const storageToken = await AsyncStorage.getItem('@Agenda4Pets:token');
-        const recoverUserFirstTime = await AsyncStorage.getItem('@Agenda4Pets:userFirstTime')
-        const getUserFirstTime = (recoverUserFirstTime || userFirstTime == null) ? recoverUserFirstTime : await AsyncStorage.setItem('@Agenda4Pets:userFirstTime', 'true');
+        const storageUser = await AsyncStorage.multiGet(['@Agenda4Pets:userFirstTime']);
+        const loadUserFirstTime = storageUser[0][1] === 'true' ? true : null
+        const getUserFirstTime = (loadUserFirstTime || userFirstTime == null) ? loadUserFirstTime : await AsyncStorage.setItem('@Agenda4Pets:userFirstTime', 'true');
+        // Exemplo de espera para Promise
+        // await new Promise(resolve => setTimeout(resolve, 3000));
         setUserFirstTime(getUserFirstTime)
+        setLoading(false)
     }
 
     async function updateUserFirstTime () {
         await AsyncStorage.setItem('@Agenda4Pets:userFirstTime', 'false');
         setUserFirstTime(false)
+    }
+
+    async function loadApiInfo () {
+
     }
 
     useEffect(() => {
@@ -48,10 +55,11 @@ export const ConfigProvider = ({ children }) => {
         // AsyncStorage.setItem('@Agenda4Pets:userFirstTime', 'true');
         // AsyncStorage.getItem('@Agenda4Pets:userFirstTime').then((t) => console.log('type', t))
         loadStorageData()
+        loadApiInfo()
     }, [])
-    
+
     return (
-        <ConfigContext.Provider value={ {apiInfo, netInfo, userFirstTime, updateUserFirstTime }}>
+        <ConfigContext.Provider value={ {apiInfo, netInfo, userFirstTime, updateUserFirstTime, loading }}>
             { children }   
         </ConfigContext.Provider>
     )

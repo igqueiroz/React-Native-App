@@ -1,5 +1,5 @@
 import React, { useContext, useRef, memo, useEffect, useState, useCallback } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ActivityIndicator } from 'react-native';
 import Welcome from '../Welcome';
 import Login from '../Login';
 import { ConfigContext } from '../../store/ConfigProvider';
@@ -23,7 +23,7 @@ const Profile = () => {
 }
 
 const ChooseFirstPage = (props) => {
-  if (props.userFirstTime == "true") {
+  if (props.userFirstTime === true) {
     return <Welcome carouselItems={ carouselItems } navigation={ props.navigation } />
   } else {
     return <Login navigation={ props.navigation } />
@@ -31,9 +31,10 @@ const ChooseFirstPage = (props) => {
 }
 
 const FirstPageLogic = ( props ) => {
-  const { netInfo, userFirstTime } = useContext(ConfigContext);
+  const { netInfo, userFirstTime, loading } = useContext(ConfigContext);
   // Exemplo para recuperação de detalhes da network
   if (netInfo) console.log('Tipo do Celular', netInfo.details.carrier);
+  if (loading) return <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}><ActivityIndicator size="large" color="#ff44cc" /></View>
   return (
     <AuthProvider>
       <ChooseFirstPage navigation={ props.navigation } userFirstTime={userFirstTime} />
