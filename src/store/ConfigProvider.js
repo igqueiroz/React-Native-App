@@ -31,12 +31,14 @@ export const ConfigProvider = ({ children }) => {
     }
        
     async function loadStorageData() {
-        const storageUser = await AsyncStorage.multiGet(['@Agenda4Pets:userFirstTime']);
-        const loadUserFirstTime = storageUser[0][1] === 'true' ? true : null
-        const getUserFirstTime = (loadUserFirstTime || userFirstTime == null) ? loadUserFirstTime : await AsyncStorage.setItem('@Agenda4Pets:userFirstTime', 'true');
+        const storageUser = await AsyncStorage.getItem('@Agenda4Pets:userFirstTime');
+        // Conversão de string para Boolean
+        const loadUserFirstTime = (storageUser === 'true') ? true : false;
+        // Verificando se existe retorno do AyncStorage
+        const getUserFirstTime = (storageUser !== null)  ? loadUserFirstTime : await AsyncStorage.setItem('@Agenda4Pets:userFirstTime', 'true');
         // Exemplo de espera para Promise
         // await new Promise(resolve => setTimeout(resolve, 3000));
-        setUserFirstTime(getUserFirstTime)
+        await setUserFirstTime(getUserFirstTime)
         setLoading(false)
     }
 
@@ -48,11 +50,11 @@ export const ConfigProvider = ({ children }) => {
     async function loadApiInfo () {
 
     }
-
+    
     useEffect(() => {
         getNetwork()
         // Teste para simular primeira entrada do usuário
-        // AsyncStorage.setItem('@Agenda4Pets:userFirstTime', 'true');
+        // AsyncStorage.removeItem('@Agenda4Pets:userFirstTime');
         // AsyncStorage.getItem('@Agenda4Pets:userFirstTime').then((t) => console.log('type', t))
         loadStorageData()
         loadApiInfo()

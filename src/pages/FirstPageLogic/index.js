@@ -23,7 +23,7 @@ const Profile = () => {
 }
 
 const ChooseFirstPage = (props) => {
-  if (props.userFirstTime === true) {
+  if (props.userFirstTime === true || props.userFirstTime === null) {
     return <Welcome carouselItems={ carouselItems } navigation={ props.navigation } />
   } else {
     return <Login navigation={ props.navigation } />
