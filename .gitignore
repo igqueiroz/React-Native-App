@@ -59,4 +59,4 @@ buck-out/
 /ios/Pods/
 
 cache/
-.expo/packager-info.json
+packager-info.json

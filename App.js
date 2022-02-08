@@ -10,7 +10,7 @@ import { createAppContainer } from "react-navigation";
 import Routes from "./src/Root";
 import Constants from 'expo-constants';
 
-const devMode = Constants.manifest.extra.APP_ENV === 'DEV' ? true : false;
+const devMode = Constants.manifest.extra.APP_ENV !== 'PRD' ? true : false;
 const debug = { Debug: { screen: Debug } };
 const routes = {
   Routes: { screen: Routes },
