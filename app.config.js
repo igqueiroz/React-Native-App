@@ -4,7 +4,7 @@ const envMode = process.env.APP_ENV
 module.exports = {
     "expo": {
         "owner": "andyarm",
-        "name":  (envMode !== 'PRD') ? "Agenda4pets Debug" :  "Agenda4pets",
+        "name":  (envMode !== 'PRD') ? `Agenda4pets ${envMode}` :  "Agenda4pets",
         "slug": "agenda4pets",
         "version": "1.0.0",
         "orientation": "portrait",
