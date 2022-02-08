@@ -1,0 +1,32 @@
+{
+  "build": {
+    "staging": {
+        "distribution": "internal",
+        "releaseChannel": "staging",
+        "env": {
+            "API_URL": "https://api.staging.com",
+            "APP_ENV": "DEV"
+        }
+    },
+    "homolog": {
+        "distribution": "internal",
+        "env": {
+            "API_URL": "https://api.staging.com",
+            "APP_ENV": "HOM"
+        },
+        "android": {
+            "buildType": "apk"
+        }
+    },
+    "production": {
+        "releaseChannel": "production",
+        "env": {
+            "API_URL": "https://api.production.com",
+            "APP_ENV": "PRD"
+        }
+    }
+  },
+  "cli": {
+    "version": ">= 0.46.0"
+  }
+}

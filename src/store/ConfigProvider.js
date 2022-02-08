@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState, useRef, useCallback } from 'react';
 import NetInfo from "@react-native-community/netinfo";
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 export const ConfigContext = createContext();
 
 export const ConfigProvider = ({ children }) => {
