@@ -44,7 +44,7 @@ export const ConfigProvider = ({ children }) => {
 
     async function updateUserFirstTime () {
         await AsyncStorage.setItem(`@Agenda4Pets${envMode}:userFirstTime`, 'false');
-        setUserFirstTime(false)
+        return setUserFirstTime(false)
     }
 
     async function loadApiInfo () {
