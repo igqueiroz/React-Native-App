@@ -13,10 +13,4 @@ const Root = ( { navigation } ) => {
   )
 }
 
-Root.navigationOptions = () => {
-  const opt = {
-    headerShown: false,
-  }
-  return opt;
-}
 export default Root;

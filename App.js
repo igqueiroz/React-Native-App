@@ -1,34 +1,40 @@
 /* eslint-disable quotes */
 import { StatusBar } from "expo-status-bar";
 import React from "react";
+import { View } from "react-native";
 import Stories from "./storybook";
 import Debug from "./src/pages/Debug";
 import Welcome from "./src/pages/Welcome";
 import Login from "./src/pages/Login";
-import { createStackNavigator } from "react-navigation-stack";
-import { createAppContainer } from "react-navigation";
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Routes from "./src/Root";
 import Constants from 'expo-constants';
 
-const devMode = Constants.manifest.extra.APP_ENV !== 'PRD' ? true : false;
-const debug = { Debug: { screen: Debug } };
-const routes = {
-  Routes: { screen: Routes },
-  Stories: { screen: Stories },
-  Welcome: { screen: Welcome },
-  Login: { screen: Login },
-};
-// Verifica se está em modo dev para ir ao modo Debug
-const navigator = devMode
-  ? createStackNavigator({ ...debug, ...routes })
-  : createStackNavigator(routes);
-const AppContainer = createAppContainer(navigator);
+const navigator = () => {
+  const devMode = Constants.manifest.extra.APP_ENV !== 'PRD' ? true : false;
+  const Stack = createNativeStackNavigator();
+  const isDebug = (devMode) ? <Stack.Screen name="Debug" component={Debug} /> : null
+  let routes = (
+    <View style={{ flex: 1, backgroundColor: 'black' }}>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        { isDebug }
+        <Stack.Screen name="Routes" component={Routes} />
+        <Stack.Screen name="Stories" component={Stories} />
+        <Stack.Screen name="Welcome" component={Welcome} />
+        <Stack.Screen name="Login" component={Login} />
+      </Stack.Navigator>
+    </View>
+  )
+  return routes
+}
+
 const App = () => {
   return (
-    <>
+    <NavigationContainer>
       <StatusBar style="light" animated={true} backgroundColor="#333333" />
-      <AppContainer />
-    </>
+        { navigator() }
+    </NavigationContainer>
   );
 };
 

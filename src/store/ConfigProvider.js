@@ -1,12 +1,12 @@
 import React, { createContext, useEffect, useState, useRef, useCallback } from 'react';
 import NetInfo from "@react-native-community/netinfo";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Constants from 'expo-constants';
 export const ConfigContext = createContext();
-
 export const ConfigProvider = ({ children }) => {
     
     const [netInfo, setNetInfo ] = useState(null);
-
+    const envMode = Constants.manifest.extra.APP_ENV;
     const [userFirstTime, setUserFirstTime] = useState(null);
     const [loading, setLoading] = useState(true)
     const apiInfo = {
@@ -31,19 +31,19 @@ export const ConfigProvider = ({ children }) => {
     }
        
     async function loadStorageData() {
-        const storageUser = await AsyncStorage.getItem('@Agenda4Pets:userFirstTime');
+        const storageUser = await AsyncStorage.getItem(`@Agenda4Pets${envMode}:userFirstTime`);
         // Conversão de string para Boolean
         const loadUserFirstTime = (storageUser === 'true') ? true : false;
         // Verificando se existe retorno do AyncStorage
-        const getUserFirstTime = (storageUser !== null)  ? loadUserFirstTime : await AsyncStorage.setItem('@Agenda4Pets:userFirstTime', 'true');
+        const getUserFirstTime = (storageUser !== null)  ? loadUserFirstTime : await AsyncStorage.setItem(`@Agenda4Pets${envMode}:userFirstTime`, 'true');
         // Exemplo de espera para Promise
         // await new Promise(resolve => setTimeout(resolve, 3000));
-        await setUserFirstTime(getUserFirstTime)
+        setUserFirstTime(getUserFirstTime)
         setLoading(false)
     }
 
     async function updateUserFirstTime () {
-        await AsyncStorage.setItem('@Agenda4Pets:userFirstTime', 'false');
+        await AsyncStorage.setItem(`@Agenda4Pets${envMode}:userFirstTime`, 'false');
         setUserFirstTime(false)
     }
 
