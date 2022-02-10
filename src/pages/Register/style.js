@@ -9,21 +9,27 @@ const LoginStyle = {
     alignItems: 'center',
   },
   gradientAgenda: ['#FCB314', '#ED1C24'],
-  gradientFacebook: ['#ea4235', '#ea4235'],
+  gradientRegister: ['#FF4C00', '#FF4C00', '#FF4C00'],
   styleGradient: { 
     borderRadius: 5,
     marginHorizontal: 15,
     borderRadius: 10,
   },
-  styleButton: {
+  styleInput: {
     fontSize: 15,
-    color: '#ffffff',
+    color: '#FF4C00',
     fontWeight: 'bold',
-    paddingHorizontal: 22,
-    paddingVertical: 15
+    paddingHorizontal: 15,
+    paddingVertical: 5,
+    marginTop: 5,
+    padding: 10,
+    backgroundColor: "#CACACA",
+    borderRadius: 5,
+    width: 270
+
   },
   view: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'space-around',
     marginTop: 45
   },
@@ -31,20 +37,18 @@ const LoginStyle = {
     flexDirection: 'row',
     marginTop: 30
   },
-  googleLogin: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginVertical: 0,
-    paddingHorizontal: 60
+  register: {
+    paddingHorizontal: 85,
+    backgroundColor: 'transparent',
+    height: 36,
+    color: 'white',
   },
-  googleImage: {
-    marginTop: 9,
-    marginLeft: 10,
-  },
-  styleButtonGoogle: {
-    paddingHorizontal: 12
+  password: {
+    position: 'absolute',
+    top: 10,
+    right: 5,
+    zIndex: 99
   }
 }
-
 
 module.exports = LoginStyle

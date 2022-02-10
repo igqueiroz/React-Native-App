@@ -20,9 +20,7 @@ const Login = (props) => {
 
   return (
     <ImageBackground source={imageBackground} style={LoginStyle.background} >
-      <Image
-        source={require('../../../src/assets/images/agendapets_logo.png')}
-      />
+      <Image source={require('../../../src/assets/images/agendapets_logo.png')} />
       <View style={LoginStyle.view}>
         <LinearGradient
           colors={LoginStyle.gradientAgenda}
@@ -56,10 +54,13 @@ const Login = (props) => {
           ]}
         >
           <TouchableOpacity onPress={alertFunc}>
-            <Text
-              style={{...LoginStyle.styleButton, ...LoginStyle.styleButtonFb}}>
-              Logar com Facebook
-            </Text>
+            <View style={LoginStyle.googleLogin}>
+              <Image  style={LoginStyle.googleImage} source={require('../../../src/assets/images/g-normal.png')} />
+              <Text
+                style={{...LoginStyle.styleButton, ...LoginStyle.styleButtonGoogle}}>
+                Logar com Google
+              </Text>
+            </View>
           </TouchableOpacity>
         </LinearGradient>
       </View>
