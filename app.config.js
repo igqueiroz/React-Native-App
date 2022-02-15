@@ -1,12 +1,13 @@
 
-const envMode = process.env.APP_ENV
+const envMode = process.env.APP_ENV;
+const packageInfo = require('./package')
 
 module.exports = {
   "expo": {
     "owner": "andyarm",
-    "name":  (envMode !== 'PRD') ? `Agenda4pets ${envMode}` :  "Agenda4pets",
-    "slug": "agenda4pets",
-    "version": "1.0.0",
+    "name":  (envMode !== 'PRD') ? `ExpoApp ${envMode}` :  "ExpoApp",
+    "slug": "expoapp",
+    "version": packageInfo.version,
     "orientation": "portrait",
     "icon":  (envMode !== 'PRD') ? "./assets/icon-debug.png" : "./assets/icon.png",
     "splash": {

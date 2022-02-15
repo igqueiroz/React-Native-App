@@ -5,6 +5,6 @@
   "minify": false,
   "urlRandomness": "sc-w76",
   "https": false,
-  "scheme": "exp+agenda4pets",
+  "scheme": "agenda_debug.apk",
   "devClient": false
 }
