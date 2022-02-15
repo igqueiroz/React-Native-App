@@ -23,17 +23,4 @@ const StorybookUIRoot = getStorybookUI({
   theme: darkTheme
 });
 
-StorybookUIRoot.navigationOptions = () => {
-  const opt = {
-      title: null,
-      headerMode: 'float',
-      headerTransparent: true,
-  }
-
-  if (Platform.OS === "android") {
-      opt.headerShown = false
-  }
-  return opt;
-}
-
 export default StorybookUIRoot;

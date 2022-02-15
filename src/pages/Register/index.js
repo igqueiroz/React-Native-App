@@ -13,8 +13,8 @@ const Login = (props) => {
   const [cpf, setCpf] = useState({});
   const [cel, setCelphone] = useState({});
   const [email, setEmail] = useState({});
-  const [password, setShowPassword] = useState({show: false, text: null})
-  const [rePassword, setReShowPassword] = useState({show: false, text: null})
+  const [password, setShowPassword] = useState({show: false, text: null })
+  const [rePassword, setReShowPassword] = useState({show: false, text: null })
   
   const showPassword = () => {
     if (password.show) setShowPassword({show: false, text: password.text})
@@ -26,16 +26,50 @@ const Login = (props) => {
     else setReShowPassword({show: true, text: rePassword.text})
   }
 
+  const validationFields = () => {
+    if ( !fullName.fullName || !cpf.number || !cel.number || !email.email || !password.text || !rePassword.text) {
+      return {
+      success: false,
+      msg: { title: "Eiii..", desc: "Todos os campos são obrigatórios." }};
+    }
+    if (fullName.fullName.indexOf(" ") < 0) return {
+      success: false,  
+      msg: { title: "Hey..", desc: "Você precisa inserir seu nome completo" }
+    };
+    let emailValid = (/.*[@].*[\.]/g).test(email.email);
+    if (!emailValid) return {
+      success: false,  
+      msg: { title: "Hey..", desc: "Digite um e-mail válido" }
+    };
+    if (cel.number.trim().length < 14) return {
+      success: false,  
+      msg: { title: "Hey..", desc: "Digite um telefone válido" }
+    }
+    if (cpf.number.trim().length < 14) return {
+      success: false,  
+      msg: { title: "Hey..", desc: "Digite um CPF válido" }
+    }
+    if (password.text !== rePassword.text) return {
+      success: false,  
+      msg: { title: "Opps..", desc: "As senhas devem ser idênticas." }
+    };
+    if (password.text.trim().length < 8) return {  
+      success: false,  
+      msg: { title: "Iiii..", desc: "A senha precisa no mínimo 8 caracteres." }
+    };
+    return { success: true, msg: { title: "Uhuu!", desc: "Conta criada com sucesso!" }};
+  }
+
   const onSubmit = () => {
-    if (password.text !== rePassword.text) return Alert.alert('Opps..','As senhas devem ser idênticas.');
-    if (password.text.trim().length < 8) return Alert.alert('Opps..', 'A senha precisa no mínimo 8 caracteres');
-    if (password.text.trim().length < 8) return Alert.alert('Opps..', 'A senha precisa no mínimo 8 caracteres');
-    return Alert.alert('Uhuu','Conta Criada com sucesso');
+    const valid = validationFields();
+    if (!valid.success) return Alert.alert(valid.msg.title, valid.msg.desc);
+    return Alert.alert(valid.msg.title, valid.msg.desc );
   }
   const passwordShow = (type) => {
     if (type.show) return <Image source={require('../../../src/assets/images/eye.png')} />
     else return <Image source={require('../../../src/assets/images/eye-closed.png')} />
   }
+
   return (
     <ImageBackground source={imageBackground} style={LoginStyle.background} >
       <Image source={require('../../../src/assets/images/agendapets_logo.png')} />

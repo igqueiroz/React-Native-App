@@ -14,15 +14,15 @@ import Constants from 'expo-constants';
 const navigator = () => {
   const devMode = Constants.manifest.extra.APP_ENV !== 'PRD' ? true : false;
   const Stack = createNativeStackNavigator();
-  const isDebug = (devMode) ? <Stack.Screen name="Debug" component={Debug} /> : null
+  const isDebug = (devMode) ? <Stack.Screen name="Debug" component={ Debug } /> : null
   let routes = (
     <View style={{ flex: 1, backgroundColor: 'black' }}>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         { isDebug }
-        <Stack.Screen name="Routes" component={Routes} />
-        <Stack.Screen name="Stories" component={Stories} />
-        <Stack.Screen name="Welcome" component={Welcome} />
-        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Routes" component={ Routes } />
+        <Stack.Screen name="Stories" component={ Stories } />
+        <Stack.Screen name="Welcome" component={ Welcome } />
+        <Stack.Screen name="Login" component={ Login } />
       </Stack.Navigator>
     </View>
   )
