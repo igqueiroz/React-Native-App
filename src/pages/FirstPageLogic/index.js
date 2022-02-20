@@ -1,7 +1,8 @@
 import React, { useContext, memo } from 'react';
-import { View, Text, ActivityIndicator } from 'react-native';
+import { View, Text, ActivityIndicator, Alert } from 'react-native';
 import Welcome from '../Welcome';
 import Login from '../Login';
+import LoadingOverlay from '../../components/LoadingOverlay';
 import { ConfigContext } from '../../store/ConfigProvider';
 import { AuthProvider } from '../../store/AuthProvider';
 
@@ -33,8 +34,10 @@ const ChooseFirstPage = (props) => {
 const FirstPageLogic = ( props ) => {
   const { netInfo, userFirstTime, loading } = useContext(ConfigContext);
   // Exemplo para recuperação de detalhes da network
+  // console.log('>>>>>', netInfo)
   if (netInfo) console.log('Tipo do Celular', netInfo.details.carrier);
-  if (loading) return <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}><ActivityIndicator size="large" color="#ff44cc" /></View>
+  if (netInfo && !netInfo.isConnected) Alert.alert('Sem internet', 'Favor verifique sua conexão e entre novamente.' );
+  if (loading) return <LoadingOverlay/>
   return (
     <AuthProvider>
       <ChooseFirstPage navigation={ props.navigation } userFirstTime={userFirstTime} />
@@ -42,10 +45,4 @@ const FirstPageLogic = ( props ) => {
   ) 
 }
 
-FirstPageLogic.navigationOptions = () => {
-    const opt = {
-      headerShown: false,
-    }
-    return opt;
-}
 export default memo(FirstPageLogic);

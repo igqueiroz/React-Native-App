@@ -10,6 +10,7 @@ import Register from '../../src/pages/Register';
 import { ConfigProvider } from '../../src/store/ConfigProvider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Constants from 'expo-constants';
+import LoadingOverlay from '../../src/components/LoadingOverlay';
 
 storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
 
@@ -37,3 +38,5 @@ storiesOf('Carousel', module).add('for new users', () => {
 
 storiesOf('Login', module).add('page', () => <Login />);
 storiesOf('Register', module).add('new clients', () => <Register />);
+
+storiesOf('LoadingOverlay', module).add('screen', () => <LoadingOverlay />);

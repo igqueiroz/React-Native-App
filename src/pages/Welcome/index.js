@@ -94,11 +94,4 @@ const Welcome = (props) => {
   return <MyCarousel carouselItems={props.carouselItems} navigation={props.navigation}/>
 };
 
-Welcome.navigationOptions = () => {
-  const opt = {
-    headerShown: false,
-  }
-  return opt;
-}
-
 export default memo(Welcome);
