@@ -13,19 +13,21 @@ const LoginStyle = {
   styleGradient: { 
     borderRadius: 5,
     marginHorizontal: 15,
-    borderRadius: 10,
+    borderRadius: 10
   },
   styleButton: {
     fontSize: 15,
     color: '#ffffff',
     fontWeight: 'bold',
-    paddingHorizontal: 22,
-    paddingVertical: 15
+    paddingHorizontal: 10
   },
   view: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     marginTop: 45
+  },
+  viewMargin: {
+    marginRight: 12
   },
   loginStyleRow: {
     flexDirection: 'row',
@@ -35,14 +37,15 @@ const LoginStyle = {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginVertical: 0,
-    paddingHorizontal: 60
+    paddingHorizontal: 50
   },
   googleImage: {
     marginTop: 9,
-    marginLeft: 10,
+    marginLeft: 20
   },
   styleButtonGoogle: {
-    paddingHorizontal: 12
+    paddingHorizontal: 7,
+    paddingVertical: 15
   }
 }
 

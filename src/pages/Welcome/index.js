@@ -14,13 +14,13 @@ import { LinearGradient } from 'expo-linear-gradient';
 import Button from '../../components/Button';
 import { View } from 'react-native-animatable';
 import { ConfigContext } from '../../store/ConfigProvider';
-
+const whiteArrow = require("../../../src/assets/images/white-arrow-right.png");
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
 
 const MyCarousel = (props) => {
-  const {carouselItems, navigation} = props;
-  const {updateUserFirstTime} = useContext(ConfigContext)
+  const { carouselItems, navigation } = props;
+  const { updateUserFirstTime } = useContext(ConfigContext)
   const [ entries, setEntries ] = useState([]);
   const [ activeDot, setactiveDot ] = useState(0);
   const carouselRef = useRef( null );
@@ -62,7 +62,7 @@ const MyCarousel = (props) => {
                 <Button goScreen="Routes" navigation={ navigation } execute={ updateUserFirstTime }>
                   <View style={StartButton.items}>
                     <Text style={StartButton.textStyle}>Começar</Text>
-                    <Image source={ require("../../../src/assets/images/white-arrow-right.png") } style={ StartButton.imgSendStyle } />
+                    <Image source={ whiteArrow } style={ StartButton.imgSendStyle } />
                   </View>
                 </Button>
             </LinearGradient>

@@ -6,6 +6,8 @@ import Stories from "./storybook";
 import Debug from "./src/pages/Debug";
 import Welcome from "./src/pages/Welcome";
 import Login from "./src/pages/Login";
+import Signup from "./src/pages/Signup";
+import Signin from "./src/pages/Signin";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Routes from "./src/Root";
@@ -22,6 +24,8 @@ const navigator = () => {
         <Stack.Screen name="Routes" component={ Routes } />
         <Stack.Screen name="Stories" component={ Stories } />
         <Stack.Screen name="Welcome" component={ Welcome } />
+        <Stack.Screen name="Signup" component={ Signup } />
+        <Stack.Screen name="Signin" component={ Signin } />
         <Stack.Screen name="Login" component={ Login } />
       </Stack.Navigator>
     </View>

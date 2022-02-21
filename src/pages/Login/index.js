@@ -2,9 +2,11 @@ import React, { memo, useContext} from 'react';
 import { Image, Text, View, ImageBackground, TouchableOpacity } from 'react-native';
 import LoginStyle from './style';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useState } from 'react';
+import Button from '../../components/Button';
 import { AuthContext } from '../../store/AuthProvider';
 const imageBackground = require('../../../src/assets/images/login.png');
+const imageLogo = require('../../../src/assets/images/agendapets_logo.png');
+const googleIcon = require('../../../src/assets/images/g-normal.png');
 
 const Login = (props) => {
   const [user, setUser] = useContext(AuthContext);
@@ -12,38 +14,17 @@ const Login = (props) => {
     alert('teste')
   }
 
-  const registerPage = ({ page }) => {
-    const [changePage, setChangePage ] = useState(page);
-  
-    setChangePage([newChange]);
-  }
 
   return (
-    <ImageBackground source={imageBackground} style={LoginStyle.background} >
-      <Image source={require('../../../src/assets/images/agendapets_logo.png')} />
-      <View style={LoginStyle.view}>
-        <LinearGradient
-          colors={LoginStyle.gradientAgenda}
-          style={[LoginStyle.styleGradient ]}
-        >
-          <TouchableOpacity onPress={registerPage}>
-            <Text
-              style={LoginStyle.styleButton}>
-              Cadastre-se
-            </Text>
-          </TouchableOpacity>
-        </LinearGradient>
-        <LinearGradient
-          colors={LoginStyle.gradientAgenda}
-          style={[LoginStyle.styleGradient ]}
-        >
-          <TouchableOpacity onPress={alertFunc}>
-            <Text
-              style={LoginStyle.styleButton}>
-              Já possuo conta
-            </Text>
-          </TouchableOpacity>
-        </LinearGradient>
+    <ImageBackground source={ imageBackground } style={ LoginStyle.background } >
+      <Image source={ imageLogo } />
+      <View style={ LoginStyle.view }>
+        <View style={ LoginStyle.viewMargin }>
+          <Button goScreen="Signup" navigation={props.navigation}><Text style={ LoginStyle.styleButton }>Registre-se</Text></Button>
+        </View>
+        <View>
+          <Button goScreen="Signin" navigation={props.navigation}><Text style={ LoginStyle.styleButton }>Já possuo conta</Text></Button>
+        </View>
       </View>
       <View style={LoginStyle.loginStyleRow}
       >
@@ -55,7 +36,7 @@ const Login = (props) => {
         >
           <TouchableOpacity onPress={alertFunc}>
             <View style={LoginStyle.googleLogin}>
-              <Image  style={LoginStyle.googleImage} source={require('../../../src/assets/images/g-normal.png')} />
+              <Image  style={LoginStyle.googleImage} source={googleIcon} />
               <Text
                 style={{...LoginStyle.styleButton, ...LoginStyle.styleButtonGoogle}}>
                 Logar com Google
@@ -66,28 +47,6 @@ const Login = (props) => {
       </View>
     </ImageBackground>
   )
-}
-
-Login.navigationOptions = () => {
-  const opt = {
-    title: null,
-    headerStyle: {
-      position: 'absolute',
-      backgroundColor: 'transparent',
-      zIndex: 100,
-      top: 0,
-      left: 0,
-      right: 0,
-      elevation: 0,
-      shadowOpacity: 0,
-      borderBottomWidth: 0,
-    }
-  }
-
-  if (Platform.OS === "android") {
-      opt.headerShown = false
-  }
-  return opt;
 }
 
 export default memo(Login);

@@ -6,7 +6,7 @@ import { linkTo } from '@storybook/addon-links';
 import Welcome from './Welcome';
 import Carousel from '../../src/pages/Welcome';
 import Login from '../../src/pages/Login';
-import Register from '../../src/pages/Register';
+import Register from '../../src/pages/Signup';
 import { ConfigProvider } from '../../src/store/ConfigProvider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Constants from 'expo-constants';
