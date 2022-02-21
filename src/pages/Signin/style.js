@@ -1,12 +1,12 @@
-import { Dimensions } from 'react-native';
-const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
-
-const LoginStyle = {
+const SigninStyle = {
+  flexViewOne: {
+    flex: 1
+  },
   background: {
     flex: 1,
     resizeMode: "cover",
     justifyContent: "center",
-    alignItems: 'center',
+    alignItems: 'center'
   },
   gradientAgenda: ['#FCB314', '#ED1C24'],
   gradientRegister: ['#FF4C00', '#FF4C00', '#FF4C00'],
@@ -19,7 +19,6 @@ const LoginStyle = {
     fontSize: 15,
     color: '#FF4C00',
     fontWeight: 'bold',
-    paddingHorizontal: 15,
     paddingVertical: 5,
     marginTop: 5,
     padding: 10,
@@ -33,15 +32,20 @@ const LoginStyle = {
     justifyContent: 'space-around',
     marginTop: 45
   },
-  loginStyleRow: {
+  signinStyleRow: {
     flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
     marginTop: 30
   },
   register: {
-    paddingHorizontal: 85,
+    flexDirection: 'row',
     backgroundColor: 'transparent',
     height: 36,
     color: 'white',
+    justifyContent: 'center',
+    width: 'auto',
+    paddingHorizontal: 125
   },
   password: {
     position: 'absolute',
@@ -51,4 +55,4 @@ const LoginStyle = {
   }
 }
 
-module.exports = LoginStyle
+module.exports = SigninStyle
