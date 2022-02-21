@@ -41,11 +41,11 @@ const SigninStyle = {
   register: {
     flexDirection: 'row',
     backgroundColor: 'transparent',
-    height: 36,
+    paddingVertical: 0,
     color: 'white',
     justifyContent: 'center',
     width: 'auto',
-    paddingHorizontal: 125
+    paddingHorizontal: 115
   },
   password: {
     position: 'absolute',

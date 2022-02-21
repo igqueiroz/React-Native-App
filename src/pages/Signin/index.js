@@ -1,10 +1,9 @@
 import React from 'react';
 import { Image, Text, View, ImageBackground, TouchableOpacity, TextInput, Alert, KeyboardAvoidingView, Platform  } from 'react-native';
 import SigninStyle from './style';
-import { LinearGradient } from 'expo-linear-gradient';
 import { useState } from 'react';
-import { TextInputMask } from 'react-native-masked-text';
 import LoadingOverlay from '../../components/LoadingOverlay';
+import Button from '../../components/Button';
 
 const imageBack = require('../../../src/assets/images/login.png');
 const passEye = require('../../../src/assets/images/eye.png');
@@ -31,10 +30,6 @@ const Signin = (props) => {
     if (!emailValid) return {
       success: false,  
       msg: { title: "Hey..", desc: "Digite um e-mail válido" }
-    };
-    if (password.text !== rePassword.text) return {
-      success: false,  
-      msg: { title: "Opps..", desc: "As senhas devem ser idênticas." }
     };
     return { success: true };
   }
@@ -69,55 +64,48 @@ const Signin = (props) => {
   }
 
   return (
-    <>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={SigninStyle.flexViewOne}
-      >
-      { loading && <LoadingOverlay /> }
-      <View style={SigninStyle.flexViewOne}>
-          <ImageBackground source={imageBack} style={SigninStyle.background} >
-            <Image source={agendalogo} />
-              <View style={SigninStyle.view}>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={SigninStyle.flexViewOne}
+    >
+    { loading && <LoadingOverlay /> }
+    <View style={SigninStyle.flexViewOne}>
+        <ImageBackground source={imageBack} style={SigninStyle.background} >
+          <Image source={agendalogo} />
+            <View style={SigninStyle.view}>
+              <TextInput
+                style={SigninStyle.styleInput}
+                value={ email.text }
+                onChangeText={text => {
+                  setEmail({ email: text })
+                }}
+                placeholder="E-mail"
+              />
+              <View>
                 <TextInput
+                  secureTextEntry={!password.show}
                   style={SigninStyle.styleInput}
-                  value={ email.text }
+                  placeholder="Senha"
+                  value={ password.text }
                   onChangeText={text => {
-                    setEmail({ email: text })
+                    setShowPassword({show: password.show, text })
                   }}
-                  placeholder="E-mail"
                 />
-                 <View>
-                  <TextInput
-                    secureTextEntry={!password.show}
-                    style={SigninStyle.styleInput}
-                    placeholder="Senha"
-                    value={ password.text }
-                    onChangeText={text => {
-                      setShowPassword({show: password.show, text })
-                    }}
-                  />
-                  <TouchableOpacity style={SigninStyle.password} onPress={() => showPassword()}>
-                    { passwordShow(password) }
-                  </TouchableOpacity>
-                </View>
+                <TouchableOpacity style={SigninStyle.password} onPress={() => showPassword()}>
+                  { passwordShow(password) }
+                </TouchableOpacity>
               </View>
-              <View style={SigninStyle.signinStyleRow}>
-                <LinearGradient
-                  colors={SigninStyle.gradientRegister}
-                  style={[SigninStyle.styleGradient]}
-                >
-                  <TouchableOpacity onPress={() => onSubmit()}>
-                    <Text style={{...SigninStyle.styleInput, ...SigninStyle.register}}>
-                      OK
-                    </Text>
-                  </TouchableOpacity>
-                </LinearGradient>
-              </View>
-          </ImageBackground>
-      </View>
-    </KeyboardAvoidingView>
-    </>
+            </View>
+
+            <View style={SigninStyle.signinStyleRow}>
+              <Button execute={ onSubmit } >
+                  <Text style={{...SigninStyle.styleInput, ...SigninStyle.register}}>OK</Text>
+              
+              </Button>
+            </View>
+        </ImageBackground>
+    </View>
+  </KeyboardAvoidingView>
   )
 }
 

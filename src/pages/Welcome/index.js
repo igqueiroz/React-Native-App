@@ -58,7 +58,6 @@ const MyCarousel = (props) => {
               colors={ StartButton.gradientAgenda }
               style={ StartButton.style }
               >
-                {/* <Button goScreen="Routes" navigation={ navigation } > */}
                 <Button goScreen="Routes" navigation={ navigation } execute={ updateUserFirstTime }>
                   <View style={StartButton.items}>
                     <Text style={StartButton.textStyle}>Começar</Text>
