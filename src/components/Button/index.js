@@ -17,7 +17,7 @@ const Button = (props) => {
   }
 
   const ChangePage = () => {
-    if (props.execute) execute()
+    if (props.execute) return execute()
     props.navigation.push(props.goScreen)
   }
 
