@@ -45,6 +45,9 @@ const Login = (props) => {
           </TouchableOpacity>
         </LinearGradient>
       </View>
+      <View>
+          <Button goScreen="Home" navigation={props.navigation}><Text style={ LoginStyle.styleButton }>Home Teste</Text></Button>
+        </View>
     </ImageBackground>
   )
 }

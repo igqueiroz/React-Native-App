@@ -11,6 +11,7 @@ import { ConfigProvider } from '../../src/store/ConfigProvider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Constants from 'expo-constants';
 import LoadingOverlay from '../../src/components/LoadingOverlay';
+import Home from '../../src/pages/Home';
 
 storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
 
@@ -40,3 +41,5 @@ storiesOf('Login', module).add('page', () => <Login />);
 storiesOf('Register', module).add('new clients', () => <Register />);
 
 storiesOf('LoadingOverlay', module).add('screen', () => <LoadingOverlay />);
+
+storiesOf('Home', module).add('Page', () => <Home />);
