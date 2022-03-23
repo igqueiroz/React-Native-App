@@ -1,6 +1,6 @@
 /* eslint-disable quotes */
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useContext } from "react";
 import { View } from "react-native";
 import Stories from "./storybook";
 import Debug from "./src/pages/Debug";
@@ -11,9 +11,10 @@ import Signin from "./src/pages/Signin";
 import Home from "./src/pages/Home";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import  isLoggedIn  from './src/auth';
+import { isLoggedIn }  from './src/auth';
 import Routes from "./src/Root";
 import Constants from 'expo-constants';
+import { AuthProvider } from './src/store/AuthProvider';
 
 const navigator = () => {
   const devMode = Constants.manifest.extra.APP_ENV !== 'PRD' ? true : false;
@@ -25,15 +26,14 @@ const navigator = () => {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         { isDebug }
         <Stack.Screen name="Stories" component={ Stories } />
-        {isLoggedIn ? (
+        <Stack.Screen name="Routes" component={ Routes } />
+        {isLoggedIn() ? (
           <>
-          <Stack.Screen name="Routes" component={ Routes } />
-          <Stack.Screen name="Welcome" component={ Welcome } />
-          <Stack.Screen name="Home" component={ Home } />
+            <Stack.Screen name="Welcome" component={ Welcome } />
+            <Stack.Screen name="Home" component={ Home } />
           </>
         ) : (
           <>
-            <Stack.Screen name="Routes" component={ Routes } />
             <Stack.Screen name="Welcome" component={ Welcome } />
             <Stack.Screen name="Login" component={ Login } />
             <Stack.Screen name="Signup" component={ Signup } />
@@ -48,10 +48,12 @@ const navigator = () => {
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <StatusBar style="light" animated={true} backgroundColor="#333333" />
-        { navigator() }
-    </NavigationContainer>
+    <AuthProvider>
+      <NavigationContainer >
+        <StatusBar style="light" animated={true} backgroundColor="#333333" />
+          { navigator() }
+      </NavigationContainer>
+    </AuthProvider>
   );
 };
 

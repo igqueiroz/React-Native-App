@@ -53,9 +53,6 @@ export const ConfigProvider = ({ children }) => {
     
     useEffect(() => {
         getNetwork()
-        // Teste para simular primeira entrada do usuário
-        // AsyncStorage.removeItem('@Agenda4Pets:userFirstTime');
-        // AsyncStorage.getItem('@Agenda4Pets:userFirstTime').then((t) => console.log('type', t))
         loadStorageData()
         loadApiInfo()
     }, [])

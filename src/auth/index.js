@@ -1,12 +1,17 @@
-console.log('teste3')
-// async function isLoggedIn (props) {
-   
-//     const user = '1';
+// import storage from './../api/storage';
+// import Constants from 'expo-constants';
+//  import AsyncStorage from '@react-native-async-storage/async-storage';
+// const envMode = Constants.manifest.extra.APP_ENV;
+// const isLoogedIn = await storage.getData(`@Agenda4Pets${envMode}:token`).then((value) => {
+//     if (value !== null || !value) return false;
+//     return value;
+// });
 
-//     console.log('user >>>>>>>>>>>>>>>>>>>>>>>>>', user)
-//     // if (!user) return false;
-//     return true;
-// }
-const isLoggedIn = true
+//  const value = AsyncStorage.getItem(`@Agenda4Pets${envMode}:token`);
+import { useUser } from './useUser';
+// console.log('isLoogedIn >>>>>>>>>>>>>', value);
 
-export default isLoggedIn
+export const isLoggedIn = props => {
+    const user = useUser();
+    return true
+}

@@ -3,13 +3,13 @@ import { Image, Text, View, ImageBackground, TouchableOpacity } from 'react-nati
 import LoginStyle from './style';
 import { LinearGradient } from 'expo-linear-gradient';
 import Button from '../../components/Button';
-import { AuthContext } from '../../store/AuthProvider';
+
 const imageBackground = require('../../../src/assets/images/login.png');
 const imageLogo = require('../../../src/assets/images/agendapets_logo.png');
 const googleIcon = require('../../../src/assets/images/g-normal.png');
 
 const Login = (props) => {
-  const [user, setUser] = useContext(AuthContext);
+
   const alertFunc = () => {
     alert('teste')
   }

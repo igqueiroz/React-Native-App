@@ -4,7 +4,6 @@ import Welcome from '../Welcome';
 import Login from '../Login';
 import LoadingOverlay from '../../components/LoadingOverlay';
 import { ConfigContext } from '../../store/ConfigProvider';
-import { AuthProvider } from '../../store/AuthProvider';
 
 const carouselItems = [
     {
@@ -19,10 +18,6 @@ const carouselItems = [
     }
 ]
 
-const Profile = () => {
-  return (<View style={{justifyContent: "center", alignItems: "center", flex: 1}}><Text>DASHBOARD</Text></View>)
-}
-
 const ChooseFirstPage = (props) => {
   if (props.userFirstTime === true || props.userFirstTime === null) {
     return <Welcome carouselItems={ carouselItems } navigation={ props.navigation } />
@@ -33,14 +28,13 @@ const ChooseFirstPage = (props) => {
 
 const FirstPageLogic = ( props ) => {
   const { netInfo, userFirstTime, loading } = useContext(ConfigContext);
+  console.log('here')
   // Exemplo para recuperação de detalhes da network
   if (netInfo) console.log('Tipo do Celular', netInfo.details.carrier);
   if (netInfo && !netInfo.isConnected) Alert.alert('Sem internet', 'Favor verifique sua conexão e entre novamente.' );
   if (loading) return <LoadingOverlay/>
   return (
-    <AuthProvider>
-      <ChooseFirstPage navigation={ props.navigation } userFirstTime={userFirstTime} />
-    </AuthProvider>
+    <ChooseFirstPage navigation={ props.navigation } userFirstTime={userFirstTime} />
   ) 
 }
 

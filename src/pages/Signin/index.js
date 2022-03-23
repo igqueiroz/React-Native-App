@@ -37,14 +37,6 @@ const Signin = (props) => {
 
   const sendData = async () => {
     
-    return fetch("https://api.chucknorris.io/jokes/random", { "method": "GET" })
-      .then((response) => response.json())
-      .then((json) => {
-        return { success: true, msg: { title: "Uhuu..", desc: json }}
-      })
-      .catch((error) => {
-        return { success: false, msg: { title: "Tente novamente mais tarde" , desc: `Erro:\n${error.message}` }}
-      });
     }
 
   const onSubmit = async () => {
