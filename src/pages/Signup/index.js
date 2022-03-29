@@ -5,6 +5,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useState } from 'react';
 import { TextInputMask } from 'react-native-masked-text';
 import LoadingOverlay from '../../components/LoadingOverlay';
+import Constants from 'expo-constants';
+import { useToken } from '../../auth/useToken';
 
 const imageBack = require('../../../src/assets/images/login.png');
 const passEye = require('../../../src/assets/images/eye.png');
@@ -12,6 +14,7 @@ const passEyeClosed = require('../../../src/assets/images/eye-closed.png');
 const agendalogo = require('../../../src/assets/images/agendapets_logo.png');
 
 const Signup = (props) => {
+  const [token, setToken] = useToken();
   const [loading, setLoading] = useState(false);
   const [fullName, setFullName] = useState({});
   const [cpf, setCpf] = useState({});
@@ -66,13 +69,34 @@ const Signup = (props) => {
 
 
   const sendData = async () => {
-    
-    return fetch("https://api.chucknorris.io/jokes/random", { "method": "GET" })
+    const options = {
+      method: 'POST',
+      body: JSON.stringify({
+        email: email.email,
+        password: password.text,
+        cpf: cpf.number,
+        full_name: fullName.fullName,
+        phone: cel.number
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+        'Accept': 'application/json'
+      }
+    }
+
+    return fetch( `${Constants.manifest.extra.API_URL}/user`, options)
       .then((response) => response.json())
       .then((json) => {
-        return { success: true, msg: { title: "Uhuu..", desc: json }}
+        console.log('token recebido > ', json)
+        if (json.token) {
+          console.log('json.token', json.token)
+          setToken(json.token);
+          return { success: true, msg: { title: "Parabéns!", desc: "Sua conta foi criada com sucesso"} }
+        }
+        if (json.code === "ER_DUP_ENTRY") return { success: false, msg: { title: "Você já possui uma conta", desc: "Realize o login" }}
       })
       .catch((error) => {
+        console.log(error);
         return { success: false, msg: { title: "Tente novamente mais tarde" , desc: `Erro:\n${error.message}` }}
       });
     }
@@ -83,7 +107,7 @@ const Signup = (props) => {
     setLoading(true);
     const result = await sendData();
     setLoading(false);
-    if (valid.success && result.success) return Alert.alert(result.msg.title, JSON.stringify(result.msg.desc) );
+    if (valid.success && result.success) return Alert.alert(result.msg.title, result.msg.desc );
     if (!valid.success && result.msg) return Alert.alert(result.msg.title, result.msg.desc );
     return Alert.alert(result.msg.title, result.msg.desc );
   }

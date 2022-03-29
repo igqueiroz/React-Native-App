@@ -2,16 +2,15 @@ import { useState } from 'react';
 import storage from '../api/storage'
 
 export const useToken = () => {
-    const [token, setTokenInternal] = useState(async () => {
-        const getData = await storage.getData('token');
-        console.log('getData', getData)
-        return getData
+    const [token, setTokenInternal] = useState( async () => {
+        const result = await storage.getData('token');
+        return result;
     });
 
-    const setToken = async (newToken) => {
-        const save = await storage.saveAndUpdateData('token', newToken);
+    const setToken = (newToken) => {
+        storage.saveAndUpdateData('token', newToken);
         setTokenInternal(newToken);
     }
 
-    return [token, setToken];
+    return  [ token, setToken ];
 }

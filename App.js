@@ -11,12 +11,14 @@ import Signin from "./src/pages/Signin";
 import Home from "./src/pages/Home";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { isLoggedIn }  from './src/auth';
+import { useUser } from './src/auth/useUser';
 import Routes from "./src/Root";
 import Constants from 'expo-constants';
 import { AuthProvider } from './src/store/AuthProvider';
 
 const navigator = () => {
+  console.log('useUser 3', useUser() );
+
   const devMode = Constants.manifest.extra.APP_ENV !== 'PRD' ? true : false;
   const Stack = createNativeStackNavigator();
   const isDebug = (devMode) ? <Stack.Screen name="Debug" component={ Debug } /> : null
@@ -27,7 +29,7 @@ const navigator = () => {
         { isDebug }
         <Stack.Screen name="Stories" component={ Stories } />
         <Stack.Screen name="Routes" component={ Routes } />
-        {isLoggedIn() ? (
+        {true ? (
           <>
             <Stack.Screen name="Welcome" component={ Welcome } />
             <Stack.Screen name="Home" component={ Home } />

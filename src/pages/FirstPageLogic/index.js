@@ -5,6 +5,7 @@ import Login from '../Login';
 import LoadingOverlay from '../../components/LoadingOverlay';
 import { ConfigContext } from '../../store/ConfigProvider';
 
+
 const carouselItems = [
     {
       illustration: require('../../assets/images/slider1.png'),

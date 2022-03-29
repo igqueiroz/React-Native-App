@@ -1,6 +1,13 @@
 
 const envMode = process.env.APP_ENV;
 const packageInfo = require('./package')
+const eas = require('./eas')
+let apiUrl
+switch(envMode) {
+  case 'DEV': { apiUrl = eas.build.staging.env.API_URL; break; }
+  case 'HOM': { apiUrl = eas.build.homolog.env.API_URL; break; }
+  case 'PRD': { apiUrl = eas.build.production.env.API_URL; break; }
+}
 
 module.exports = {
   "expo": {
@@ -32,7 +39,8 @@ module.exports = {
     "package":  (envMode !== 'PRD') ? "agenda_debug.apk" : "agenda.apk"
     },
     "extra": {
-      "APP_ENV": envMode
+      "APP_ENV": envMode,
+      "API_URL": apiUrl
     }
   }
 }

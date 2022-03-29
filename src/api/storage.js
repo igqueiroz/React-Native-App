@@ -7,12 +7,11 @@ const saveAndUpdateData = async (key, value) => {
     try {
         if (item === null) {
             const jsonValue = JSON.stringify(value);
-            console.log('jsonValue1', jsonValue)
             await AsyncStorage.setItem(`@Agenda4Pets${envMode}:${key}`, jsonValue);
         }
         else {
             console.warn(`${key} updated!`);
-            await AsyncStorage.setItem(`@Agenda4Pets${envMode}:${key}`, jsonValue);
+            await AsyncStorage.setItem(`@Agenda4Pets${envMode}:${key}`, value);
         }
     } catch (e) {
         console.error(e);
@@ -22,10 +21,8 @@ const saveAndUpdateData = async (key, value) => {
 const getData = async (key) => {
         try {
             const value = await AsyncStorage.getItem(`@Agenda4Pets${envMode}:${key}`);
-            //const jsonValue = JSON.parse(value);
-            const jsonValue = JSON.parse('{"teste": "teste"}');
-            console.log('jsonValue2', jsonValue);
-            return jsonValue;
+            console.warn(`@Agenda4Pets${envMode}:${key}`, value);
+            return value;
         } catch (e) {
             console.error(e);
             return e;

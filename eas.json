@@ -4,7 +4,7 @@
         "distribution": "internal",
         "releaseChannel": "staging",
         "env": {
-            "API_URL": "https://api.staging.com",
+            "API_URL": "http://172.18.144.1:5000/react-native-backend/v0",
             "APP_ENV": "DEV"
         },
         "android": {
@@ -15,7 +15,7 @@
         "distribution": "internal",
         "releaseChannel": "homolog",
         "env": {
-            "API_URL": "https://api.staging.com",
+            "API_URL": "https://mobile-app-native-mode.herokuapp.com/react-native-backend/v0",
             "APP_ENV": "HOM"
         },
         "android": {
@@ -25,7 +25,7 @@
     "production": {
         "releaseChannel": "production",
         "env": {
-            "API_URL": "https://api.production.com",
+            "API_URL": "https://mobile-app-native-mode.herokuapp.com/react-native-backend/v0",
             "APP_ENV": "PRD"
         },
         "android": {

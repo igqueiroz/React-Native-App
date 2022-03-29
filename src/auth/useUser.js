@@ -1,30 +1,44 @@
 import { useState, useEffect } from 'react';
 import { useToken } from './useToken';
-import { Buffer } from 'buffer';
-export const useUser = () => {
-    const [token] = useToken();
+import { Buffer } from 'buffer'; 
 
-    const getPayloadFromToken = async(token) => {
-        console.log('token <<<<<<<<<<<<<<<<<<<<', token)
-        //  const encodedPayload = token.split('.')[1];
-        const encodedPayload = 'asdsadqwdsadwd';
-        const buffer = await Buffer.from(encodedPayload, 'base64')
-        return JSON.parse('{ "teste": "teste"}');
-        //return JSON.parse(buffer);
+export const useUser = () => {
+    console.log('token', token)
+    const [ token ] = useToken();
+
+    const getPayloadFromToken = (token) => {
+        return Promise.resolve(token).then( async(value) => {
+            const encodedPayload = value.split('.')[1];
+            const buffer = Buffer.from(encodedPayload, 'base64').toString('utf-8');
+            console.log('buffer', buffer)
+            return buffer;
+        })
     }
 
-    const [user, setUser] = useState(() => {
-        if (!token) return null;
-        return getPayloadFromToken(token);
+    const [user, setUser] = useState( () => {
+        return Promise.resolve(token).then( (value) => {
+            if (!value) return null;
+            const tokenPayload = getPayloadFromToken(value);
+            return tokenPayload;
+        })
     });
 
-    useEffect(() => {
-        if (!token) {
-            setUser(null);
-        } else {
-            setUser(getPayloadFromToken(token));
-        }
+    useEffect( () => {
+        Promise.resolve(token).then( (value) => {
+            if (!value) {
+                setUser(null);
+            } else {
+                const user = getPayloadFromToken(token);
+                console.log('useEffect', user);
+                setUser(user);
+            }
+        })
     }, [token]);
+    console.log('////////////////////////////');
+    console.log('userUser', user);
 
-    return user;
+    return Promise.resolve(user).then( (value) => {
+        console.log('value', value)
+        return value;
+    })
 }
