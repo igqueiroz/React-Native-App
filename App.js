@@ -29,7 +29,7 @@ const navigator = () => {
         { isDebug }
         <Stack.Screen name="Stories" component={ Stories } />
         <Stack.Screen name="Routes" component={ Routes } />
-        {true ? (
+        {false ? (
           <>
             <Stack.Screen name="Welcome" component={ Welcome } />
             <Stack.Screen name="Home" component={ Home } />
