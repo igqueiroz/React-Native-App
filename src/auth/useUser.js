@@ -6,7 +6,8 @@ import { Buffer } from 'buffer';
 const resolveTokenPromise = () => {
     const resolveToken = useToken();
     console.log('resolveToken', resolveToken);
-    const result = Promise.resolve(resolveToken).then( async (value1) => {
+    const result = 
+    Promise.resolve(resolveToken).then( async (value1) => {
         return Promise.resolve(value1[0]).then((value) => {
             return [ value, value1[1] ]
         })
