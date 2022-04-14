@@ -97,7 +97,7 @@ const Signup = (props) => {
       })
       .catch((error) => {
         console.log(error);
-        return { success: false, msg: { title: "Tente novamente mais tarde" , desc: `Erro:\n${error.message}` }}
+        return { success: false, msg: { title: "Tente novamente mais tarde" , desc: `Erro:\n${error.message}\n${Constants.manifest.extra.APP_ENV === 'DEV' && Constants.manifest.extra.API_URL}` }}
       });
     }
 

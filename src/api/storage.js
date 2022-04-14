@@ -19,14 +19,24 @@ const saveAndUpdateData = async (key, value) => {
 }
 
 const getData = async (key) => {
-        try {
-            const value = await AsyncStorage.getItem(`@Agenda4Pets${envMode}:${key}`);
-            console.warn(`@Agenda4Pets${envMode}:${key}`, value);
-            return value;
-        } catch (e) {
-            console.error(e);
-            return e;
-        }
+    try {
+        const value = await AsyncStorage.getItem(`@Agenda4Pets${envMode}:${key}`);
+        console.warn(`@Agenda4Pets${envMode}:${key}`, value);
+        return value;
+    } catch (e) {
+        console.error(e);
+        return e;
+    }
 }
 
-export default { getData, saveAndUpdateData  }
+const removeData = async (key) => {
+    try {
+        const value = await AsyncStorage.removeItem(`@Agenda4Pets${envMode}:${key}`);
+        return value;
+    } catch (e) {
+        console.error(e);
+        return e;
+    }
+}
+
+export default { getData, saveAndUpdateData, removeData  }

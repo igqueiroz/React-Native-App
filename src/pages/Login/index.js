@@ -1,17 +1,27 @@
 import React, { memo, useContext} from 'react';
-import { Image, Text, View, ImageBackground, TouchableOpacity } from 'react-native';
+import { Image, Text, View, ImageBackground, TouchableOpacity, Alert } from 'react-native';
 import LoginStyle from './style';
 import { LinearGradient } from 'expo-linear-gradient';
 import Button from '../../components/Button';
+import { AuthContext } from '../../store/AuthProvider'
 
 const imageBackground = require('../../../src/assets/images/login.png');
 const imageLogo = require('../../../src/assets/images/agendapets_logo.png');
 const googleIcon = require('../../../src/assets/images/g-normal.png');
 
 const Login = (props) => {
+  const { auth, logout } = useContext(AuthContext)
+  console.log(12, props)
+  if (auth.id && !auth.isVerified) {
+    Alert.alert('Ative sua conta', 'Acesse seu email e ative sua conta');
+  }
+
+  if (auth.id && auth.isVerified) {
+    return props.navigation.push('Home')
+  }
 
   const alertFunc = () => {
-    alert('teste')
+    logout()
   }
 
 
@@ -47,7 +57,16 @@ const Login = (props) => {
       </View>
       <View>
           <Button goScreen="Home" navigation={props.navigation}><Text style={ LoginStyle.styleButton }>Home Teste</Text></Button>
+      </View>
+      <TouchableOpacity onPress={alertFunc}>
+        <View style={LoginStyle.googleLogin}>
+          <Image  style={LoginStyle.googleImage} source={googleIcon} />
+          <Text
+            style={{...LoginStyle.styleButton, ...LoginStyle.styleButtonGoogle}}>
+            Logout
+          </Text>
         </View>
+      </TouchableOpacity>
     </ImageBackground>
   )
 }

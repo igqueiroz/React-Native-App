@@ -4,7 +4,7 @@
         "distribution": "internal",
         "releaseChannel": "staging",
         "env": {
-            "API_URL": "http://192.168.0.195:5000/react-native-backend/v0",
+            "API_URL": "http://192.168.15.102:5000/react-native-backend/v0",
             "APP_ENV": "DEV"
         },
         "android": {

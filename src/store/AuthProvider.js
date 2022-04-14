@@ -1,39 +1,31 @@
 import React, { createContext, useState, useEffect } from 'react';
-import login from '../api/login';
+import { useUser } from '../../src/auth/useUser';
+import { useToken } from '../../src/auth/useToken';
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+    const user = useUser();
+    const [ token, setToken, removeToken ]  =  useToken(); 
     const [auth, setAuth] = useState({
-        refreshToken: '',
-        expirationDate: '',
-        name: '',
-        email: '',
-        id: '',
-        purgePassword: false
+        email: user && user.email,
+        id: user && user.id,
+        token: user && user.token
     })
-    
-    async function loadStorageData() {
-        const storageUser = await AsyncStorage.multiGet(['@Agenda4Pets:user','@Agenda4Pets:token']);
+    async function logout() {
+        removeToken()
+        setAuth({
+            email: null,
+            id: null,
+            token: null
+        })
     }
-
-    async function getLogin() {
-        const response = await login.login()
-        setAuth(...auth, ...response.refreshToken)
-        login.defaults.headers['Authorization'] = `Bearer ${response.refreshToken}`;
-    }
-
-    async function getLogout() {
-
-    }
-
-    const teste = { mov: false }
 
     useEffect(() => {
-        // loadStorageData()
-    }, [])
+        if (user) setAuth(user)
+    }, [user])
 
     return (
-        <AuthContext.Provider value={  { teste, getLogout}  }>
+        <AuthContext.Provider value={ { auth, setAuth, logout } }>
             { children }   
         </AuthContext.Provider>
     )
