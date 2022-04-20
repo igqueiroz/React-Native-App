@@ -11,7 +11,7 @@ export const useToken = () => {
         }
 
         getData().catch(console.error);
-    })
+    }, [token])
 
     const setToken = (newToken) => {
         storage.saveAndUpdateData('token', newToken);

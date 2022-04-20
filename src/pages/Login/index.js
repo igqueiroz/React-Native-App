@@ -10,13 +10,14 @@ const imageLogo = require('../../../src/assets/images/agendapets_logo.png');
 const googleIcon = require('../../../src/assets/images/g-normal.png');
 
 const Login = (props) => {
-  const { auth, logout } = useContext(AuthContext)
-  console.log(12, props)
-  if (auth.id && !auth.isVerified) {
+  const { auth, logout, login } = useContext(AuthContext)
+  
+  console.log(12, auth)
+  if (auth && auth.id && !auth.isVerified) {
     Alert.alert('Ative sua conta', 'Acesse seu email e ative sua conta');
   }
 
-  if (auth.id && auth.isVerified) {
+  if (auth && auth.id && auth.isVerified) {
     return props.navigation.push('Home')
   }
 

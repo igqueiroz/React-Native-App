@@ -24,9 +24,7 @@ const Navigator = ( { navigation } ) => {
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             { isDebug }
             <Stack.Screen name="Stories" component={ Stories } />
-            <Stack.Screen name="Routes">
-            {props => <Routes { ...props } />}
-            </Stack.Screen>
+            <Stack.Screen name="Routes" component={ Routes } />
             { auth && auth.id ? (
             <>
                 <Stack.Screen name="Welcome" component={ Welcome } />
