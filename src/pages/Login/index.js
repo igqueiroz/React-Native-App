@@ -11,8 +11,6 @@ const googleIcon = require('../../../src/assets/images/g-normal.png');
 
 const Login = (props) => {
   const { auth, logout, login } = useContext(AuthContext)
-  
-  console.log(12, auth)
   if (auth && auth.id && !auth.isVerified) {
     Alert.alert('Ative sua conta', 'Acesse seu email e ative sua conta');
   }
@@ -56,10 +54,10 @@ const Login = (props) => {
           </TouchableOpacity>
         </LinearGradient>
       </View>
-      <View>
+      {/* <View>
           <Button goScreen="Home" navigation={props.navigation}><Text style={ LoginStyle.styleButton }>Home Teste</Text></Button>
       </View>
-      <TouchableOpacity onPress={alertFunc}>
+       <TouchableOpacity onPress={alertFunc}>
         <View style={LoginStyle.googleLogin}>
           <Image  style={LoginStyle.googleImage} source={googleIcon} />
           <Text
@@ -67,7 +65,7 @@ const Login = (props) => {
             Logout
           </Text>
         </View>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </ImageBackground>
   )
 }

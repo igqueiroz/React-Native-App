@@ -29,7 +29,6 @@ const ChooseFirstPage = (props) => {
 
 const FirstPageLogic = ( props ) => {
   const { netInfo, userFirstTime, loading } = useContext(ConfigContext);
-  console.log('here')
   // Exemplo para recuperação de detalhes da network
   if (netInfo) console.log('Tipo do Celular', netInfo.details.carrier);
   if (netInfo && !netInfo.isConnected) Alert.alert('Sem internet', 'Favor verifique sua conexão e entre novamente.' );

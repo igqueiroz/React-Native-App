@@ -15,7 +15,6 @@ import { AuthContext } from '../src/store/AuthProvider';
 
 const Navigator = ( { navigation } ) => {
     const { auth } = useContext(AuthContext)
-    console.log('auth >>> ', auth)
     const devMode = Constants.manifest.extra.APP_ENV !== 'PRD' ? true : false;
     const Stack = createNativeStackNavigator();
     const isDebug = (devMode) ? <Stack.Screen name="Debug" component={ Debug } /> : null

@@ -5,7 +5,7 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const user = useUser();
-    console.log('user XXXXXXXXXX' , user)
+    console.log('user AuthProvider' , user)
     const [ token, setToken, removeToken ] = useToken(); 
     const [auth, setAuth] = useState({
         email: user && user.email,
@@ -23,7 +23,6 @@ export const AuthProvider = ({ children }) => {
 
     async function login() {
         setAuth(user);
-        console.log('user-login', user)
     }
 
     useEffect(() => {
