@@ -1,10 +1,12 @@
 import React from 'react';
 import { Image, Text, View, ImageBackground, TouchableOpacity, TextInput, Alert, KeyboardAvoidingView, Platform  } from 'react-native';
 import SigninStyle from './style';
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import LoadingOverlay from '../../components/LoadingOverlay';
 import Button from '../../components/Button';
 import Constants from 'expo-constants';
+import { useToken } from '../../auth/useToken';
+import { AuthContext } from '../../../src/store/AuthProvider';
 
 const imageBack = require('../../../src/assets/images/login.png');
 const passEye = require('../../../src/assets/images/eye.png');
@@ -12,9 +14,19 @@ const passEyeClosed = require('../../../src/assets/images/eye-closed.png');
 const agendalogo = require('../../../src/assets/images/agendapets_logo.png');
 
 const Signin = (props) => {
+  const [token, setToken] = useToken();
+  const {login, tokenContext} = useContext(AuthContext)
   const [loading, setLoading] = useState(false);
-  const [email, setEmail] = useState({});
-  const [password, setShowPassword] = useState({show: false, text: null })
+  const [email, setEmail] = useState({email: 'thomas3@thomas3.com', text: 'thomas3@thomas3.com'});
+  const [password, setShowPassword] = useState({show: false, text: '12345678' })
+
+  useEffect( () => {
+    if (token) {
+      console.log('=============================', tokenContext)
+      console.log('=============================', token)
+      login();
+    }
+}, [token]);
 
   const showPassword = () => {
     if (password.show) setShowPassword({show: false, text: password.text})
@@ -36,6 +48,7 @@ const Signin = (props) => {
   }
 
   const handleResponse = res => {
+    // console.log('res', JSON.stringify(res))
     if(res.ok) {
       return res.json()
     }
@@ -54,14 +67,12 @@ const Signin = (props) => {
         'Accept': 'application/json'
       }
     }
-    console.log('${Constants.manifest.extra.API_URL}/login}', `${Constants.manifest.extra.API_URL}/login`)
     return fetch( `${Constants.manifest.extra.API_URL}/login`, options)
       .then(handleResponse)
       .then((json) => {
         console.log('json', json.token)
         if (json.token) {
-          setToken(json.token);
-          return { success: true }
+          return { success: true, token: json.token }
         }
       })
       .catch((error) => {
@@ -69,15 +80,26 @@ const Signin = (props) => {
         return { success: false, msg: { title: "Tente novamente mais tarde" , desc: `Erro:\n${JSON.stringify(error)}\n${Constants.manifest.extra.APP_ENV === 'DEV' && Constants.manifest.extra.API_URL}` }}
       });
     }
+  
+  const tryLogin = async () => {
+    try {
+      setLoading(true);
+      const result = await sendData();
+      await setToken(result.token);
+      setLoading(false);
+      console.log('result tryLogin', result)
+      return result
+    } catch (e) {
+      console.error(e);
+      return false
+    }
+  }
 
   const onSubmit = async () => {
     const valid = validationFields();
     if (!valid.success) return Alert.alert(valid.msg.title, valid.msg.desc);
-    setLoading(true);
-    const result = await sendData();
-    setLoading(false);
-    console.log(result)
-    if (valid.success && result.success) return props.navigation.push('Login');
+    const resultLogin = await tryLogin();
+    if (valid.success && resultLogin.success) return props.navigation.push('Login');
     return Alert.alert(result.msg.title, result.msg.desc );
   }
 

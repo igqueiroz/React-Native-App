@@ -5,8 +5,9 @@ import { Buffer } from 'buffer';
 
 export const useUser = () => {
     const [ token ]  =  useToken(); 
-    const [user, setUser] = useState(null);
+    const [ user, setUser ] = useState(null);
     
+    console.log('getPayloadFromToken', token)
     async function getPayloadFromToken () {
         if (!token) return
         const encodedPayload = token.split('.')[1];

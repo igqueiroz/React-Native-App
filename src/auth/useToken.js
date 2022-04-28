@@ -7,14 +7,16 @@ export const useToken = () => {
     useEffect(() => {
         const getData = async () => {
             const data = await storage.getData('token');
+            if (!data) return false
             setTokenInternal(data);
+            console.log('------------',data);
         }
 
-        getData().catch(console.error);
+        getData().catch((e) => console.error(e));
     }, [token])
 
-    const setToken = (newToken) => {
-        storage.saveAndUpdateData('token', newToken);
+    const setToken = async (newToken) => {
+        await storage.saveAndUpdateData('token', newToken);
         setTokenInternal(newToken);
     }
 
