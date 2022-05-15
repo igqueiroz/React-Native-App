@@ -1,5 +1,5 @@
 /* eslint-disable quotes */
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { View } from "react-native";
 import Stories from "../storybook";
 import Debug from "../src/pages/Debug";
@@ -12,18 +12,21 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Routes from "./Root";
 import Constants from 'expo-constants';
 import { AuthContext } from '../src/store/AuthProvider';
+import { useIsFocused } from '@react-navigation/native';
 
 const Navigator = ( { navigation } ) => {
-    const { auth } = useContext(AuthContext)
+    const { auth } = useContext(AuthContext);
+    const isFocused = useIsFocused();
     const devMode = Constants.manifest.extra.APP_ENV !== 'PRD' ? true : false;
     const Stack = createNativeStackNavigator();
-    const isDebug = (devMode) ? <Stack.Screen name="Debug" component={ Debug } /> : null
+    const isDebug = (devMode) ? <Stack.Screen name="Debug" component={ Debug } /> : null;
+    
     return (
     <View style={{ flex: 1, backgroundColor: 'black' }}>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             { isDebug }
             <Stack.Screen name="Stories" component={ Stories } />
-            <Stack.Screen name="Routes" component={ Routes } />
+            <Stack.Screen name="Routes" component={ Routes }  />
             { auth && auth.id ? (
             <>
                 <Stack.Screen name="Welcome" component={ Welcome } />
@@ -32,7 +35,7 @@ const Navigator = ( { navigation } ) => {
             ) : (
             <>
                 <Stack.Screen name="Welcome" component={ Welcome } />
-                <Stack.Screen name="Login" component={ Login } />
+                <Stack.Screen name="Login" component={ Login } rerender={isFocused} />
                 <Stack.Screen name="Signup" component={ Signup } />
                 <Stack.Screen name="Signin" component={ Signin } /> 
             </>

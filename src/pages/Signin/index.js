@@ -20,14 +20,6 @@ const Signin = (props) => {
   const [email, setEmail] = useState({email: 'thomas3@thomas3.com', text: 'thomas3@thomas3.com'});
   const [password, setShowPassword] = useState({show: false, text: '12345678' })
 
-  useEffect( () => {
-    if (token) {
-      console.log('=============================', tokenContext)
-      console.log('=============================', token)
-      login();
-    }
-}, [token]);
-
   const showPassword = () => {
     if (password.show) setShowPassword({show: false, text: password.text})
     else setShowPassword({show: true, text: password.text})
@@ -70,7 +62,6 @@ const Signin = (props) => {
     return fetch( `${Constants.manifest.extra.API_URL}/login`, options)
       .then(handleResponse)
       .then((json) => {
-        console.log('json', json.token)
         if (json.token) {
           return { success: true, token: json.token }
         }

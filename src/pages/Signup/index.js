@@ -93,12 +93,14 @@ const Signup = (props) => {
           setToken(json.token);
           return { success: true, msg: { title: "Parabéns!", desc: "Sua conta foi criada com sucesso", func: [{ 
             text: 'Ok', 
-            onPress: () => { login(); } 
+            onPress: () => {
+              props.navigation.push('Login');
+            } 
           }] }}
         }
         if (json.code === "ER_DUP_ENTRY") return { success: false, msg: { title: "Você já possui uma conta", desc: "Realize o login", func:  [{ 
           text: 'Levar ao Login', 
-          onPress: () => { props.navigation.push('Signin') } 
+          onPress: () => { props.navigation.push('Signin') }
         }] }}
       })
       .catch((error) => {

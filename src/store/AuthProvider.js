@@ -22,22 +22,8 @@ export const AuthProvider = ({ children }) => {
     }
 
     async function login() {
-        console.log('login token', token)
-        console.log('login user', user)
         setAuth(user);
     }
-
-    useEffect(() => {
-
-        if (token) {
-            setToken(token)
-        }
-        if (token && !user) {
-            setAuth(user)
-        }
-        console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
-        console.log('useEffect token', token)
-    }, [token])
 
     return (
         <AuthContext.Provider value={ { auth, setAuth, logout, login, tokenContext: token, user } }>

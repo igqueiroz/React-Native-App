@@ -5,10 +5,10 @@ import { Buffer } from 'buffer';
 
 export const useUser = () => {
     const [ token ]  =  useToken(); 
-    const [ user, setUser ] = useState(null);
+    const [ user, setUser ] = useState();
     
-    console.log('getPayloadFromToken', token)
     async function getPayloadFromToken () {
+        console.log('getPayloadFromToken', token)
         if (!token) return
         const encodedPayload = token.split('.')[1];
         const buffer = Buffer.from(encodedPayload, 'base64').toString('utf-8');
