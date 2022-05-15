@@ -9,7 +9,7 @@ export const useToken = () => {
             const data = await storage.getData('token');
             if (!data) return false
             setTokenInternal(data);
-            console.log('------------',data);
+            // console.log('------------',data);
         }
 
         getData().catch((e) => console.error(e));

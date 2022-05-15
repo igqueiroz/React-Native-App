@@ -19,6 +19,7 @@ const Login = (props) => {
   const [token] = useToken();
   const user = useUser();
   const { auth, setAuth, logout } = useContext(AuthContext)
+
   const alertFunc = () => {
     logout();
   }
@@ -50,17 +51,19 @@ const Login = (props) => {
 
   useFocusEffect(
     useCallback(() => {
+      if (user && auth && !auth.id) setAuth(user);
       if (auth && auth.id) {
         setLoading(true);
         verify(auth.id).then((verified) => {
           setLoading(false);
           if (verified) props.navigation.push('Home');
-          else Alert.alert('Ative sua conta', 'Acesse seu email e ative sua conta');
+          else {
+            Alert.alert('Ative sua conta', 'Acesse seu email e ative sua conta');
+          }
         });
       }
-      setAuth(user);
-    })
-  ),[auth];
+    }, [auth, user])
+  );
 
   return (
     <ImageBackground source={ imageBackground } style={ LoginStyle.background } >

@@ -21,12 +21,8 @@ export const AuthProvider = ({ children }) => {
         })
     }
 
-    async function login() {
-        setAuth(user);
-    }
-
     return (
-        <AuthContext.Provider value={ { auth, setAuth, logout, login, tokenContext: token, user } }>
+        <AuthContext.Provider value={ { auth, setAuth, logout, tokenContext: token, user } }>
             { children }   
         </AuthContext.Provider>
     )
