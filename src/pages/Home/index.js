@@ -6,7 +6,7 @@ const Home = (props) => {
   const { user, logout } = useContext(AuthContext);
   const logoutFunc = async () => {
     let result = await logout();
-    console.log('result logout', result)
+    return result;
   }
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center' }}>

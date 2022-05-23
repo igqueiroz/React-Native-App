@@ -15,8 +15,7 @@ export const useToken = () => {
     }, [token])
 
     const setToken = async (newToken) => {
-        const storages = await storage.saveAndUpdateData('token', newToken);
-        console.log('setToken storage', storages)
+        await storage.saveAndUpdateData('token', newToken);
         return setTokenInternal(newToken);
     }
 

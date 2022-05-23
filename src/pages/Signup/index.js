@@ -14,8 +14,7 @@ const passEyeClosed = require('../../../src/assets/images/eye-closed.png');
 const agendalogo = require('../../../src/assets/images/agendapets_logo.png');
 
 const Signup = (props) => {
-  const { setToken } = useContext(AuthContext);
-  const { login } = useContext(AuthContext)
+  const { setToken, setAutoUser } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const [fullName, setFullName] = useState({});
   const [cpf, setCpf] = useState({});
@@ -93,7 +92,7 @@ const Signup = (props) => {
           return { success: true, msg: { title: "Parabéns!", desc: "Sua conta foi criada com sucesso", func: [{ 
             text: 'Ok', 
             onPress: () => {
-              props.navigation.push('Login');
+              setAutoUser(json.token);
             } 
           }] }}
         }
@@ -103,7 +102,7 @@ const Signup = (props) => {
         }] }}
       })
       .catch((error) => {
-        // console.log(error);
+        console.error(error);
         return { success: false, msg: { title: "Tente novamente mais tarde" , desc: `Erro:\n${error.message}\n${Constants.manifest.extra.APP_ENV === 'DEV' && Constants.manifest.extra.API_URL}` }}
       });
     }

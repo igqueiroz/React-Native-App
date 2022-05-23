@@ -14,7 +14,7 @@ const googleIcon = require('../../../src/assets/images/g-normal.png');
 
 const Login = (props) => {
   const [ loading, setLoading ] = useState(false);
-  const { login, token, user } = useContext(AuthContext)
+  const { token, user } = useContext(AuthContext)
 
   const alertFunc = () => {
     Alert.alert('Ative sua conta', 'Acesse seu email e ative sua conta');
@@ -51,8 +51,9 @@ const Login = (props) => {
         setLoading(true);
         verify(user.id).then((verified) => {
           setLoading(false);
-          if (verified) props.navigation.push('Home');
-          else alertFunc();
+          console.log('verified', verified)
+          if (user.isVerified) { props.navigation.push('Home') }
+          else { alertFunc(); }
         });
       }
     }, [user])

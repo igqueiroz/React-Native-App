@@ -7,11 +7,6 @@ export const AuthProvider = ({ children }) => {
 const [ user, setUser, setAutoUser ] = useUser();
 const [ token, setToken, removeToken ] = useToken();
 
-  async function login() {
-    console.log("Tentando realizar o autologin...");
-    setAutoUser(token);
-  }
-
   async function logout() {
     await removeToken();
     setUser(null)
@@ -19,7 +14,7 @@ const [ token, setToken, removeToken ] = useToken();
   }
 
   return (
-    <AuthContext.Provider value={ { logout, login, user, token, setToken, setAutoUser } }>
+    <AuthContext.Provider value={ { logout, user, token, setToken, setAutoUser } }>
       { children }   
     </AuthContext.Provider>
   )

@@ -13,7 +13,7 @@ const passEyeClosed = require('../../../src/assets/images/eye-closed.png');
 const agendalogo = require('../../../src/assets/images/agendapets_logo.png');
 
 const Signin = (props) => {
-  const {token, setToken, setAutoUser } = useContext(AuthContext);
+  const {setToken, setAutoUser } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState({email: 'thomas3@thomas3.com', text: 'thomas3@thomas3.com'});
   const [password, setShowPassword] = useState({show: false, text: '12345678' })
@@ -88,14 +88,13 @@ const Signin = (props) => {
     const valid = validationFields();
     if (!valid.success) return Alert.alert(valid.msg.title, valid.msg.desc);
     const resultLogin = await tryLogin();
-    console.log(5)
-    if (valid.success && resultLogin.success) return props.navigation.push('Login');
+    if (valid.success && resultLogin.success) return {success: true} 
     return Alert.alert(result.msg.title, result.msg.desc );
   }
 
   const passwordShow = (type) => {
-    if (type.show) return <Image source={passEye} />
-    else return <Image source={passEyeClosed} />
+    if (type.show) { return <Image source={passEye} /> }
+    else { return <Image source={passEyeClosed} /> }
   }
 
   return (

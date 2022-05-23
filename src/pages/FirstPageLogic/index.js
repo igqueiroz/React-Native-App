@@ -1,5 +1,5 @@
 import React, { useContext, memo } from 'react';
-import { View, Text, ActivityIndicator, Alert } from 'react-native';
+import { Alert } from 'react-native';
 import Welcome from '../Welcome';
 import Login from '../Login';
 import LoadingOverlay from '../../components/LoadingOverlay';
