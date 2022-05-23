@@ -4,8 +4,6 @@ import LoginStyle from './style';
 import { LinearGradient } from 'expo-linear-gradient';
 import Button from '../../components/Button';
 import { AuthContext } from '../../store/AuthProvider'
-import { useToken } from '../../auth/useToken';
-import { useUser } from '../../auth/useUser';
 import { useFocusEffect } from '@react-navigation/native';
 import Constants from 'expo-constants';
 import LoadingOverlay from '../../components/LoadingOverlay';
@@ -15,13 +13,11 @@ const imageLogo = require('../../../src/assets/images/agendapets_logo.png');
 const googleIcon = require('../../../src/assets/images/g-normal.png');
 
 const Login = (props) => {
-  const [loading, setLoading] = useState(false);
-  const [token] = useToken();
-  const user = useUser();
-  const { auth, setAuth, logout } = useContext(AuthContext)
+  const [ loading, setLoading ] = useState(false);
+  const { login, token, user } = useContext(AuthContext)
 
   const alertFunc = () => {
-    logout();
+    Alert.alert('Ative sua conta', 'Acesse seu email e ative sua conta');
   }
 
   const verify = async (id) => {
@@ -51,18 +47,15 @@ const Login = (props) => {
 
   useFocusEffect(
     useCallback(() => {
-      if (user && auth && !auth.id) setAuth(user);
-      if (auth && auth.id) {
+      if (user && user.id) {
         setLoading(true);
-        verify(auth.id).then((verified) => {
+        verify(user.id).then((verified) => {
           setLoading(false);
           if (verified) props.navigation.push('Home');
-          else {
-            Alert.alert('Ative sua conta', 'Acesse seu email e ative sua conta');
-          }
+          else alertFunc();
         });
       }
-    }, [auth, user])
+    }, [user])
   );
 
   return (
@@ -70,47 +63,47 @@ const Login = (props) => {
       { loading && <LoadingOverlay /> }
       <Image source={ imageLogo } />
       <View style={ LoginStyle.view }>
-        <View style={ LoginStyle.viewMargin }>
-          <Button goScreen="Signup" navigation={props.navigation}><Text style={ LoginStyle.styleButton }>Registre-se</Text></Button>
-        </View>
-        <View>
-          <Button goScreen="Signin" navigation={props.navigation}><Text style={ LoginStyle.styleButton }>Já possuo conta</Text></Button>
-        </View>
+        {
+          !user &&
+          <>
+            <View style={ LoginStyle.viewMargin }>
+            <Button goScreen="Signup" navigation={props.navigation}><Text style={ LoginStyle.styleButton }>Registre-se</Text></Button>
+            </View>
+            <View>
+              <Button goScreen="Signin" navigation={props.navigation}><Text style={ LoginStyle.styleButton }>Já possuo conta</Text></Button>
+            </View>
+          </>
+        }
+        {
+          user && !user.verified &&
+          <>
+            <View style={ LoginStyle.viewMargin }>
+              <Button execute={ alertFunc }><Text style={ LoginStyle.styleButton }>Registre-se</Text></Button>
+            </View>
+            <View>
+              <Button execute={ alertFunc }><Text style={ LoginStyle.styleButton }>Já possuo conta</Text></Button>
+            </View>
+          </>
+        }
       </View>
-      <View style={LoginStyle.loginStyleRow}
-      >
+      <View style={LoginStyle.loginStyleRow}>
         <LinearGradient
           colors={LoginStyle.gradientFacebook}
-          style={[
-            LoginStyle.styleGradient
-          ]}
+          style={[LoginStyle.styleGradientz]}
         >
-          <TouchableOpacity onPress={alertFunc}>
+          <TouchableOpacity onPress={ alertFunc }>
             <View style={LoginStyle.googleLogin}>
               <Image  style={LoginStyle.googleImage} source={googleIcon} />
               <Text
                 style={{...LoginStyle.styleButton, ...LoginStyle.styleButtonGoogle}}>
                 Logar com Google
+                { user && <Text>User</Text> }
+                { token && <Text>Token</Text> }
               </Text>
-              { auth && auth.id && <Text>Auth</Text> }
-              { user && <Text>User</Text> }
-              { token && <Text>Token</Text> }
             </View>
           </TouchableOpacity>
         </LinearGradient>
       </View>
-      {/* <View>
-          <Button goScreen="Home" navigation={props.navigation}><Text style={ LoginStyle.styleButton }>Home Teste</Text></Button>
-      </View>
-       <TouchableOpacity onPress={alertFunc}>
-        <View style={LoginStyle.googleLogin}>
-          <Image  style={LoginStyle.googleImage} source={googleIcon} />
-          <Text
-            style={{...LoginStyle.styleButton, ...LoginStyle.styleButtonGoogle}}>
-            Logout
-          </Text>
-        </View>
-      </TouchableOpacity> */}
     </ImageBackground>
   )
 }

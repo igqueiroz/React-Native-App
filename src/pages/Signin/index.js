@@ -1,12 +1,11 @@
 import React from 'react';
 import { Image, Text, View, ImageBackground, TouchableOpacity, TextInput, Alert, KeyboardAvoidingView, Platform  } from 'react-native';
 import SigninStyle from './style';
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import LoadingOverlay from '../../components/LoadingOverlay';
 import Button from '../../components/Button';
 import Constants from 'expo-constants';
-import { useToken } from '../../auth/useToken';
-import { AuthContext } from '../../../src/store/AuthProvider';
+import { AuthContext } from '../../store/AuthProvider';
 
 const imageBack = require('../../../src/assets/images/login.png');
 const passEye = require('../../../src/assets/images/eye.png');
@@ -14,8 +13,7 @@ const passEyeClosed = require('../../../src/assets/images/eye-closed.png');
 const agendalogo = require('../../../src/assets/images/agendapets_logo.png');
 
 const Signin = (props) => {
-  const [token, setToken] = useToken();
-  const {login, tokenContext} = useContext(AuthContext)
+  const {token, setToken, setAutoUser } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState({email: 'thomas3@thomas3.com', text: 'thomas3@thomas3.com'});
   const [password, setShowPassword] = useState({show: false, text: '12345678' })
@@ -76,9 +74,9 @@ const Signin = (props) => {
     try {
       setLoading(true);
       const result = await sendData();
-      await setToken(result.token);
+      setToken(result.token);
+      setAutoUser(result.token);
       setLoading(false);
-      console.log('result tryLogin', result)
       return result
     } catch (e) {
       console.error(e);
@@ -90,6 +88,7 @@ const Signin = (props) => {
     const valid = validationFields();
     if (!valid.success) return Alert.alert(valid.msg.title, valid.msg.desc);
     const resultLogin = await tryLogin();
+    console.log(5)
     if (valid.success && resultLogin.success) return props.navigation.push('Login');
     return Alert.alert(result.msg.title, result.msg.desc );
   }

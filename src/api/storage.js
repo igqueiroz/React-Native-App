@@ -8,13 +8,16 @@ const saveAndUpdateData = async (key, value) => {
         if (item === null) {
             const jsonValue = JSON.stringify(value);
             await AsyncStorage.setItem(`@Agenda4Pets${envMode}:${key}`, jsonValue);
+            return { success: true }
         }
         else {
             console.warn(`${key} updated!`);
             await AsyncStorage.setItem(`@Agenda4Pets${envMode}:${key}`, value);
+            return { success: true }
         }
     } catch (e) {
         console.error(e);
+        return  { success: false }
     }
 }
 

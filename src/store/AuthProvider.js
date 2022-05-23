@@ -1,29 +1,26 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { useUser } from '../../src/auth/useUser';
-import { useToken } from '../../src/auth/useToken';
+import { useUser } from '../auth/useUser';
+import { useToken } from '../auth/useToken';
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const user = useUser();
-    console.log('user AuthProvider' , user)
-    const [ token, setToken, removeToken ] = useToken();
-    const [auth, setAuth] = useState({
-        email: user && user.email,
-        id: user && user.id,
-        token: user && user.token
-    })
-    async function logout() {
-        removeToken()
-        setAuth({
-            email: null,
-            id: null,
-            token: null
-        })
-    }
+const [ user, setUser, setAutoUser ] = useUser();
+const [ token, setToken, removeToken ] = useToken();
 
-    return (
-        <AuthContext.Provider value={ { auth, setAuth, logout, tokenContext: token, user } }>
-            { children }   
-        </AuthContext.Provider>
-    )
+  async function login() {
+    console.log("Tentando realizar o autologin...");
+    setAutoUser(token);
+  }
+
+  async function logout() {
+    await removeToken();
+    setUser(null)
+    return { success: true }
+  }
+
+  return (
+    <AuthContext.Provider value={ { logout, login, user, token, setToken, setAutoUser } }>
+      { children }   
+    </AuthContext.Provider>
+  )
 }

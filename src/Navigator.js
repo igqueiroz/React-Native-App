@@ -12,11 +12,9 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Routes from "./Root";
 import Constants from 'expo-constants';
 import { AuthContext } from '../src/store/AuthProvider';
-import { useIsFocused } from '@react-navigation/native';
 
 const Navigator = ( { navigation } ) => {
-    const { auth } = useContext(AuthContext);
-    const isFocused = useIsFocused();
+    const { user } = useContext(AuthContext);
     const devMode = Constants.manifest.extra.APP_ENV !== 'PRD' ? true : false;
     const Stack = createNativeStackNavigator();
     const isDebug = (devMode) ? <Stack.Screen name="Debug" component={ Debug } /> : null;
@@ -27,7 +25,7 @@ const Navigator = ( { navigation } ) => {
             { isDebug }
             <Stack.Screen name="Stories" component={ Stories } />
             <Stack.Screen name="Routes" component={ Routes }  />
-            { auth && auth.id ? (
+            { user && user.id ? (
             <>
                 <Stack.Screen name="Welcome" component={ Welcome } />
                 <Stack.Screen name="Home" component={ Home } />
@@ -35,7 +33,7 @@ const Navigator = ( { navigation } ) => {
             ) : (
             <>
                 <Stack.Screen name="Welcome" component={ Welcome } />
-                <Stack.Screen name="Login" component={ Login } rerender={isFocused} />
+                <Stack.Screen name="Login" component={ Login } />
                 <Stack.Screen name="Signup" component={ Signup } />
                 <Stack.Screen name="Signin" component={ Signin } /> 
             </>

@@ -6,7 +6,6 @@ import { useState, useContext } from 'react';
 import { TextInputMask } from 'react-native-masked-text';
 import LoadingOverlay from '../../components/LoadingOverlay';
 import Constants from 'expo-constants';
-import { useToken } from '../../auth/useToken';
 import { AuthContext } from '../../../src/store/AuthProvider';
 
 const imageBack = require('../../../src/assets/images/login.png');
@@ -15,7 +14,7 @@ const passEyeClosed = require('../../../src/assets/images/eye-closed.png');
 const agendalogo = require('../../../src/assets/images/agendapets_logo.png');
 
 const Signup = (props) => {
-  const [token, setToken] = useToken();
+  const { setToken } = useContext(AuthContext);
   const { login } = useContext(AuthContext)
   const [loading, setLoading] = useState(false);
   const [fullName, setFullName] = useState({});

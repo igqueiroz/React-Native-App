@@ -5,24 +5,25 @@ export const useToken = () => {
     const [ token, setTokenInternal ] = useState(null);
 
     useEffect(() => {
-        const getData = async () => {
-            const data = await storage.getData('token');
-            if (!data) return false
-            setTokenInternal(data);
-            // console.log('------------',data);
+        if (!token) {
+            const getData = async () => {
+                 const data = await storage.getData('token');
+                 if (data) setTokenInternal(data);
+             }
+             getData().catch((e) => console.error(e));
         }
-
-        getData().catch((e) => console.error(e));
     }, [token])
 
     const setToken = async (newToken) => {
-        await storage.saveAndUpdateData('token', newToken);
-        setTokenInternal(newToken);
+        const storages = await storage.saveAndUpdateData('token', newToken);
+        console.log('setToken storage', storages)
+        return setTokenInternal(newToken);
     }
 
-    const removeToken = () => {
-        storage.removeData('token');
+    const removeToken = async () => {
+        const tokenRemoved = await storage.removeData('token');
+        return tokenRemoved
     }
 
-    return [ token, setToken, removeToken ]; 
+    return [ token, setToken, removeToken ];
 }
