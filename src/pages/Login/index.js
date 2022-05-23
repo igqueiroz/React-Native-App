@@ -51,8 +51,7 @@ const Login = (props) => {
         setLoading(true);
         verify(user.id).then((verified) => {
           setLoading(false);
-          console.log('verified', verified)
-          if (user.isVerified) { props.navigation.push('Home') }
+          if (verified) { props.navigation.push('Home') }
           else { alertFunc(); }
         });
       }
