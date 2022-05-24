@@ -8,8 +8,8 @@ const [ user, setUser, setAutoUser ] = useUser();
 const [ token, setToken, removeToken ] = useToken();
 
   async function logout() {
-    await removeToken();
-    setUser(null)
+    const removed = await removeToken();
+    setUser(removed)
     return { success: true }
   }
 

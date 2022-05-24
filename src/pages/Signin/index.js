@@ -39,9 +39,7 @@ const Signin = (props) => {
 
   const handleResponse = res => {
     // console.log('res', JSON.stringify(res))
-    if(res.ok) {
-      return res.json()
-    }
+    if(res.ok) return res.json()
     throw new Error( JSON.stringify(res.status) )
   }
 
