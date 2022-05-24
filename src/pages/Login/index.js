@@ -16,8 +16,26 @@ const Login = (props) => {
   const [ loading, setLoading ] = useState(false);
   const { token, user } = useContext(AuthContext)
 
-  const alertFunc = () => {
-    Alert.alert('Ative sua conta', 'Acesse seu email e ative sua conta');
+  const alertFunc = (retry = false) => {
+    let alertActive = (!retry) ? undefined : [{
+      text: 'Ok'
+    },{
+      text: 'Reenviar e-mail', 
+      onPress: () => {
+        Alert.alert('Ative sua conta', 'E-mail de ativação reenviado com sucesso');   
+      } 
+    }]
+    Alert.alert('Ative sua conta', 'Acesse seu email e ative sua conta', alertActive)
+  }
+
+  const verifyAgain = async () => {
+    setLoading(true);
+    await verify(user.id).then((verified) => {
+      setLoading(false);
+      if (verified) { props.navigation.push('Home') }
+      else { alertFunc(true); }
+    });
+    setLoading(false);
   }
 
   const verify = async (id) => {
@@ -78,10 +96,10 @@ const Login = (props) => {
           user && !user.verified &&
           <>
             <View style={ LoginStyle.viewMargin }>
-              <Button execute={ alertFunc }><Text style={ LoginStyle.styleButton }>Registre-se</Text></Button>
+              <Button execute={ verifyAgain }><Text style={ LoginStyle.styleButton }>Registre-se</Text></Button>
             </View>
             <View>
-              <Button execute={ alertFunc }><Text style={ LoginStyle.styleButton }>Já possuo conta</Text></Button>
+              <Button execute={ verifyAgain }><Text style={ LoginStyle.styleButton }>Já possuo conta</Text></Button>
             </View>
           </>
         }
